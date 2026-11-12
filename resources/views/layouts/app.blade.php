@@ -22,6 +22,12 @@
             'icon' => 'fa-users',
             'active' => request()->routeIs('personal.*'),
         ];
+        $menu[] = [
+            'label' => 'Instalaciones',
+            'url' => route('instalaciones.index'),
+            'icon' => 'fa-building',
+            'active' => request()->routeIs('instalaciones.*'),
+        ];
     }
     if (Route::has('tareas.index')) {
         $menu[] = [

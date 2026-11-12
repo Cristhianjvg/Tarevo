@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InstalacionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\TareaController;
@@ -17,6 +18,10 @@ Route::get('/dashboard', function () {
 
 Route::get('/personal', [PersonalController::class, 'index'])->middleware('auth')->name('personal.index');
 Route::post('/personal', [PersonalController::class, 'store'])->middleware('auth')->name('personal.store');
+Route::put('/personal/{user}', [PersonalController::class, 'update'])->middleware('auth')->name('personal.update');
+
+Route::get('/instalaciones', [InstalacionController::class, 'index'])->middleware('auth')->name('instalaciones.index');
+Route::post('/instalaciones', [InstalacionController::class, 'store'])->middleware('auth')->name('instalaciones.store');
 
 Route::get('/tarea', [TareaController::class, 'index'])->middleware('auth')->name('tareas.index');
 Route::get('/tarea/create', [TareaController::class, 'create'])
