@@ -13,6 +13,16 @@
             'active' => request()->routeIs('dashboard'),
         ];
     }
+
+    if ($authUser?->esSupervisor() && Route::has('personal.index')) {
+        $menu[] = ['group' => 'Gestión'];
+        $menu[] = [
+            'label' => 'Personal',
+            'url' => route('personal.index'),
+            'icon' => 'fa-users',
+            'active' => request()->routeIs('personal.*'),
+        ];
+    }
 @endphp
 <!DOCTYPE html>
 <html lang="es" id="root" data-theme="light">

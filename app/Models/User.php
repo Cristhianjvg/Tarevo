@@ -7,10 +7,10 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 #[Fillable(['nombre', 'username', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -36,6 +36,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Rol::class, 'role_user', 'user_id', 'role_id')
             ->withTimestamps();
+    }
+
+    public function esSupervisor(): bool
+    {
+        return $this->roles->contains('slug', 'supervisor');
     }
 
     public function instalaciones(): HasMany
