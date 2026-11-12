@@ -2,6 +2,17 @@
     $authUser = auth()->user();
     $displayName = $authUser?->nombre ?? $authUser?->username ?? 'Usuario';
     $roleLabel = $authUser?->roles->pluck('nombre')->join(', ') ?: 'Sin rol';
+
+    $menu = [['group' => 'Principal']];
+
+    if (Route::has('dashboard')) {
+        $menu[] = [
+            'label' => 'Dashboard',
+            'url' => route('dashboard'),
+            'icon' => 'fa-house',
+            'active' => request()->routeIs('dashboard'),
+        ];
+    }
 @endphp
 <!DOCTYPE html>
 <html lang="es" id="root" data-theme="light">
@@ -85,32 +96,18 @@
 
         <div class="sw-body">
             {{-- SIDEBAR --}}
-            <nav class="sw-sidebar" id="sw-sidebar" aria-label="Navegación principal">
-                <div class="sw-sb-brand">
-                    <div class="sw-sb-brand-name">{{ config('app.name') }}</div>
-                    <div class="sw-sb-brand-sub">Gestión de tareas</div>
-                </div>
-
-                <div class="sw-sb-group">Principal</div>
-                @if (Route::has('dashboard'))
-                    <a href="{{ route('dashboard') }}"
-                       class="sw-sb-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <i class="fa-solid fa-house"></i> Dashboard
-                    </a>
-                @endif
-
-                @stack('sidebar')
-
+            <x-sw-sidebar :items="$menu" :brand="config('app.name')" brand-sub="Gestión de tareas">
                 @if (Route::has('logout'))
-                    <div class="sw-sb-group">Cuenta</div>
-                    <form action="{{ route('logout') }}" method="POST" class="sw-sb-form">
-                        @csrf
-                        <button type="submit" class="sw-sb-link sw-sb-action">
-                            <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
-                        </button>
-                    </form>
+                    <x-slot:footer>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="sw-sb-link sw-sb-action">
+                                <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+                            </button>
+                        </form>
+                    </x-slot:footer>
                 @endif
-            </nav>
+            </x-sw-sidebar>
 
             <button type="button" class="sw-sidebar-backdrop"
                     aria-label="Cerrar menú" onclick="swCloseSidebar()"></button>
