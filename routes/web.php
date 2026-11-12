@@ -16,8 +16,7 @@ Route::get('/dashboard', function () {
 })->middleware('auth')->name('dashboard');
 
 Route::get('/personal', [PersonalController::class, 'index'])->middleware('auth')->name('personal.index');
-Route::get('/personal/create', [PersonalController::class, 'create'])
-    ->name('personal.create');
+Route::post('/personal', [PersonalController::class, 'store'])->middleware('auth')->name('personal.store');
 
 Route::get('/tarea', [TareaController::class, 'index'])->middleware('auth')->name('tareas.index');
 Route::get('/tarea/create', [TareaController::class, 'create'])

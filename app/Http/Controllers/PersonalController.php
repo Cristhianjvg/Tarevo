@@ -18,4 +18,27 @@ class PersonalController extends Controller
 
         return view('personal.index', compact('personal'));
     }
+
+    public function store(Request $request)
+    {
+        abort_unless($request->user()->esSupervisor(), 403);
+
+        $validatedData = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'nombre' => $validatedData['nombre'],
+            'username' => $validatedData['username'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+        ]);
+
+        $user->assignRole('encargado_operativo');
+
+        return redirect()->route('personal.index')->with('success', 'Usuario creado exitosamente.');
+    }
 }
