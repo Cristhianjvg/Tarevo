@@ -23,6 +23,8 @@ Route::delete('/personal/{user}', [PersonalController::class, 'destroy'])->middl
 
 Route::get('/instalaciones', [InstalacionController::class, 'index'])->middleware('auth')->name('instalaciones.index');
 Route::post('/instalaciones', [InstalacionController::class, 'store'])->middleware('auth')->name('instalaciones.store');
+Route::put('/instalaciones/{instalacion}', [InstalacionController::class, 'update'])->middleware('auth')->name('instalaciones.update');
+Route::delete('/instalaciones/{instalacion}', [InstalacionController::class, 'destroy'])->middleware('auth')->name('instalaciones.destroy');
 
 Route::get('/tarea', [TareaController::class, 'index'])->middleware('auth')->name('tareas.index');
 Route::get('/tarea/create', [TareaController::class, 'create'])

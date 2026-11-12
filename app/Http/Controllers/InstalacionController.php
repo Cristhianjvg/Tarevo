@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Instalacion;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -37,5 +38,35 @@ class InstalacionController extends Controller
         Instalacion::create($validatedData);
 
         return redirect()->route('instalaciones.index')->with('success', 'Instalación creada exitosamente.');
+    }
+
+    public function update(Request $request, Instalacion $instalacion): RedirectResponse
+    {
+        abort_unless($request->user()->esSupervisor(), 403);
+
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'direccion' => 'nullable|string|max:350',
+        ]);
+
+        $instalacion->update($validatedData);
+
+        return redirect()->route('instalaciones.index')->with('success', 'Instalación actualizada exitosamente.');
+    }
+
+    public function destroy(Request $request, Instalacion $instalacion): RedirectResponse
+    {
+        abort_unless($request->user()->esSupervisor(), 403);
+
+        try {
+            $instalacion->delete();
+        } catch (QueryException) {
+            return redirect()->route('instalaciones.index')
+                ->with('error', 'No se puede eliminar: la instalación tiene tareas o rutinas asociadas.');
+        }
+
+        return redirect()->route('instalaciones.index')->with('success', 'Instalación eliminada exitosamente.');
     }
 }

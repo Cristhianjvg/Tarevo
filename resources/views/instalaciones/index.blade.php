@@ -21,6 +21,10 @@
         <div class="sw-alert sw-alert-success">{{ session('success') }}</div>
     @endif
 
+    @if (session('error'))
+        <div class="sw-alert sw-alert-error">{{ session('error') }}</div>
+    @endif
+
     <section class="sw-card sw-list-card">
         <div class="sw-table-wrap sw-list-table-wrap">
             <table class="sw-table">
@@ -30,6 +34,7 @@
                         <th>Dirección</th>
                         <th>Responsable</th>
                         <th>Descripción</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,10 +44,30 @@
                             <td>{{ $instalacion->direccion ?? '—' }}</td>
                             <td>{{ $instalacion->responsable->nombre }}</td>
                             <td>{{ $instalacion->descripcion ?? '—' }}</td>
+                            <td>
+                                <div class="sw-table-actions">
+                                    <button type="button" class="sw-bico" title="Editar" aria-label="Editar"
+                                            data-action="{{ route('instalaciones.update', $instalacion) }}"
+                                            data-id="{{ $instalacion->id }}"
+                                            data-nombre="{{ $instalacion->nombre }}"
+                                            data-direccion="{{ $instalacion->direccion }}"
+                                            data-descripcion="{{ $instalacion->descripcion }}"
+                                            data-user-id="{{ $instalacion->user_id }}"
+                                            onclick="abrirEditarInstalacion(this)">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <button type="button" class="sw-bico" title="Eliminar" aria-label="Eliminar"
+                                            data-action="{{ route('instalaciones.destroy', $instalacion) }}"
+                                            data-nombre="{{ $instalacion->nombre }}"
+                                            onclick="abrirEliminarInstalacion(this)">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4">No hay instalaciones registradas.</td>
+                            <td colspan="5">No hay instalaciones registradas.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -53,13 +78,36 @@
     {{ $instalaciones->links() }}
 
     @include('instalaciones.partials.crear-modal')
-@if ($errors->any())
+    @include('instalaciones.partials.editar-modal')
+    @include('instalaciones.partials.eliminar-modal')
+
     @push('scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                swOpenModal('crearInstalacion');
-            });
+            function abrirEditarInstalacion(btn) {
+                document.getElementById('editarInstalacionForm').action = btn.dataset.action;
+                document.getElementById('edit_inst_id').value = btn.dataset.id;
+                document.getElementById('edit_inst_nombre').value = btn.dataset.nombre;
+                document.getElementById('edit_inst_direccion').value = btn.dataset.direccion;
+                document.getElementById('edit_inst_descripcion').value = btn.dataset.descripcion;
+                document.getElementById('edit_inst_user_id').value = btn.dataset.userId;
+                swOpenModal('editarInstalacion');
+            }
+
+            function abrirEliminarInstalacion(btn) {
+                document.getElementById('eliminarInstalacionForm').action = btn.dataset.action;
+                document.getElementById('eliminarInstalacionNombre').textContent = btn.dataset.nombre;
+                swOpenModal('eliminarInstalacion');
+            }
         </script>
     @endpush
-@endif
+
+    @if ($errors->any())
+        @push('scripts')
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    swOpenModal('{{ old('_modal') === 'editar' ? 'editarInstalacion' : 'crearInstalacion' }}');
+                });
+            </script>
+        @endpush
+    @endif
 @endsection
