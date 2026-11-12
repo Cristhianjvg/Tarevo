@@ -9,8 +9,10 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['nombre', 'username', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -28,5 +30,36 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Rol::class, 'role_user', 'user_id', 'role_id')
+            ->withTimestamps();
+    }
+
+    public function instalaciones(): HasMany
+    {
+        return $this->hasMany(Instalacion::class, 'user_id');
+    }
+
+    public function tareasCreadas(): HasMany
+    {
+        return $this->hasMany(Tarea::class, 'creada_por_user_id');
+    }
+
+    public function tareasAsignadas(): HasMany
+    {
+        return $this->hasMany(Tarea::class, 'asignada_a_user_id');
+    }
+
+    public function rutinasCreadas(): HasMany
+    {
+        return $this->hasMany(Rutina::class, 'creada_por_user_id');
+    }
+
+    public function rutinasAsignadas(): HasMany
+    {
+        return $this->hasMany(Rutina::class, 'asignada_a_user_id');
     }
 }
