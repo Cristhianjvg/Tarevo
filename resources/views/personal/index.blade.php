@@ -19,6 +19,14 @@
         </div>
     </div>
 
+    @if (session('success'))
+        <div class="sw-alert sw-alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if (session('error'))
+        <div class="sw-alert sw-alert-error">{{ session('error') }}</div>
+    @endif
+
     <section class="sw-card sw-list-card">
         <div class="sw-table-wrap sw-list-table-wrap">
             <table class="sw-table">
@@ -28,6 +36,7 @@
                         <th>Usuario</th>
                         <th>Correo</th>
                         <th>Rol</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,10 +50,32 @@
                                     <span class="sw-badge sw-badge-info">{{ $rol->nombre }}</span>
                                 @endforeach
                             </td>
+                            <td>
+                                <div class="sw-table-actions">
+                                    <button type="button" class="sw-bico" title="Editar" aria-label="Editar"
+                                            data-action="{{ route('personal.update', $persona) }}"
+                                            data-id="{{ $persona->id }}"
+                                            data-nombre="{{ $persona->nombre }}"
+                                            data-username="{{ $persona->username }}"
+                                            data-email="{{ $persona->email }}"
+                                            data-rol-id="{{ $persona->roles->first()?->id }}"
+                                            onclick="abrirEditarPersonal(this)">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    @if ($persona->id !== auth()->id())
+                                        <button type="button" class="sw-bico" title="Eliminar" aria-label="Eliminar"
+                                                data-action="{{ route('personal.destroy', $persona) }}"
+                                                data-nombre="{{ $persona->nombre }}"
+                                                onclick="abrirEliminarPersonal(this)">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    @endif
+                                </div>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4">No hay personal registrado.</td>
+                            <td colspan="5">No hay personal registrado.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -53,7 +84,6 @@
     </section>
 
     {{ $personal->links() }}
-@endsection
 <div class="sw-modal-backdrop" id="crearPersonal">
     <div class="sw-modal sw-modal-lg"
          role="dialog"
@@ -129,12 +159,17 @@
             </div>
 
             <div class="sw-field">
-                <label class="sw-label" for="roles">Rol</label>
-                <select class="sw-select @error('roles') sw-error @enderror"
-                        id="roles" name="roles[]" multiple required>
-                    <option value="1" disabled selected>Encargado Operativo</option>
+                <label class="sw-label" for="rol_id">Rol</label>
+                <select class="sw-select @error('rol_id') sw-error @enderror"
+                        id="rol_id" name="rol_id" required>
+                    <option value="">Selecciona un rol</option>
+                    @foreach ($roles as $rol)
+                        <option value="{{ $rol->id }}" @selected(old('rol_id') == $rol->id)>
+                            {{ $rol->nombre }}
+                        </option>
+                    @endforeach
                 </select>
-                @error('roles')
+                @error('rol_id')
                     <span class="sw-hint-error">{{ $message }}</span>
                 @enderror
             </div>
@@ -152,12 +187,39 @@
     </div>
 </div>
 
+@include('personal.partials.editar-modal')
+@include('personal.partials.eliminar-modal')
+
+@push('scripts')
+    <script>
+        function abrirEditarPersonal(btn) {
+            var form = document.getElementById('editarPersonalForm');
+            form.action = btn.dataset.action;
+            document.getElementById('edit_user_id').value = btn.dataset.id;
+            document.getElementById('edit_nombre').value = btn.dataset.nombre;
+            document.getElementById('edit_username').value = btn.dataset.username;
+            document.getElementById('edit_email').value = btn.dataset.email;
+            document.getElementById('edit_rol_id').value = btn.dataset.rolId;
+            document.getElementById('edit_password').value = '';
+            document.getElementById('edit_password_confirmation').value = '';
+            swOpenModal('editarPersonal');
+        }
+
+        function abrirEliminarPersonal(btn) {
+            document.getElementById('eliminarPersonalForm').action = btn.dataset.action;
+            document.getElementById('eliminarPersonalNombre').textContent = btn.dataset.nombre;
+            swOpenModal('eliminarPersonal');
+        }
+    </script>
+@endpush
+
 @if ($errors->any())
     @push('scripts')
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                swOpenModal('crearPersonal');
+                swOpenModal('{{ old('_modal') === 'editar' ? 'editarPersonal' : 'crearPersonal' }}');
             });
         </script>
     @endpush
 @endif
+@endsection

@@ -19,6 +19,7 @@ Route::get('/dashboard', function () {
 Route::get('/personal', [PersonalController::class, 'index'])->middleware('auth')->name('personal.index');
 Route::post('/personal', [PersonalController::class, 'store'])->middleware('auth')->name('personal.store');
 Route::put('/personal/{user}', [PersonalController::class, 'update'])->middleware('auth')->name('personal.update');
+Route::delete('/personal/{user}', [PersonalController::class, 'destroy'])->middleware('auth')->name('personal.destroy');
 
 Route::get('/instalaciones', [InstalacionController::class, 'index'])->middleware('auth')->name('instalaciones.index');
 Route::post('/instalaciones', [InstalacionController::class, 'store'])->middleware('auth')->name('instalaciones.store');
