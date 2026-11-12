@@ -23,6 +23,14 @@
             'active' => request()->routeIs('personal.*'),
         ];
     }
+    if (Route::has('tareas.index')) {
+        $menu[] = [
+            'label' => 'Tareas',
+            'url' => route('tareas.index'),
+            'icon' => 'fa-list-check',
+            'active' => request()->routeIs('tareas.*'),
+        ];
+    }
 @endphp
 <!DOCTYPE html>
 <html lang="es" id="root" data-theme="light">
