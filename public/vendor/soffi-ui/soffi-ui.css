@@ -1,0 +1,6846 @@
+/*! Soffi UI 1.2.1 — fuente unica de estilos Soffiweb.
+ * Generado por scripts/build.php. NO EDITAR: el proximo build lo sobrescribe.
+ * Piso de navegador: Chrome/Edge 109 · Firefox 115 ESR · Safari 15.6
+ */
+
+/* ===== src/tokens/color.css ===== */
+/* Paleta — base Sofficon (11 de 13 colores del nucleo ya eran consenso entre
+   las 4 apps; success/warning/info resueltos en hex, no oklch()).
+
+   + --sw-auth-bg / --sw-auth-card-bg: de SoffCaja (unica que los tenia). */
+
+:root {
+    /* Hace que el navegador pinte su propio chrome (calendario nativo,
+       scrollbars, autofill) acorde al tema activo. */
+    color-scheme: light;
+
+    --sw-primary: #28449a;
+    --sw-primary-contrast: #ffffff;
+    --sw-secondary: #4361ee;
+    --sw-secondary-contrast: #ffffff;
+    --sw-accent: #fa75ad;
+    --sw-accent-contrast: #2b2230;
+    --sw-neutral: #303237;
+    --sw-neutral-contrast: #fdfdff;
+    --sw-bg: #fdfdff;
+    --sw-surface: #edf1fb;
+    --sw-text: #151b1e;
+    --sw-text-muted: #6b7280;
+    --sw-success: #00ba7b;
+    --sw-success-contrast: #fdfdff;
+    --sw-warning: #fa9700;
+    --sw-warning-contrast: #fdfdff;
+    --sw-error: #e11d48;
+    --sw-error-contrast: #fdfdff;
+    --sw-info: #00a4f2;
+    --sw-info-contrast: #fdfdff;
+
+    --sw-sidebar-bg: #1e2330;
+    --sw-table-header-bg: #e8eef8;
+    --sw-table-header-text: #28449a;
+    --sw-table-sticky-border: #c4cee3;
+    --sw-button-text: #fdfdff;
+
+    /* Unico par de tokens que hoy solo tenia SoffCaja. */
+    --sw-auth-bg: #edf0fb;
+    --sw-auth-card-bg: #ffffff;
+
+    /* Estatico primero (Chrome/Edge <=110, Safari <=16.1): el navegador viejo
+       se queda con esto. La redeclaracion moderna va en @supports, abajo.
+       Dentro de :root la doble declaracion NO sirve: una custom property con
+       valor invalido no se descarta, se hereda como `unset`. */
+    --sw-border: 1px solid rgba(67, 97, 238, 0.28);
+    --sw-border-strong: 1px solid rgba(67, 97, 238, 0.5);
+
+    /* Alias cortos — el 90% del CSS de componentes los usa a ellos, no a los
+       --sw-*. NO renombrar: invalida ~550 var(--) por archivo de componentes.
+       Es ademas lo unico que gesnom (legacy, `main`) entiende hoy — son el
+       puente de migracion. */
+    --p: var(--sw-primary);
+    --pc: var(--sw-primary-contrast);
+    --s: var(--sw-secondary);
+    --sc: var(--sw-secondary-contrast);
+    --a: var(--sw-accent);
+    --ac: var(--sw-accent-contrast);
+    --n: var(--sw-neutral);
+    --nc: var(--sw-neutral-contrast);
+    --b1: var(--sw-bg);
+    --b2: var(--sw-surface);
+    --bc: var(--sw-text);
+    --bc2: var(--sw-text-muted);
+    --su: var(--sw-success);
+    --suc: var(--sw-success-contrast);
+    --wa: var(--sw-warning);
+    --wac: var(--sw-warning-contrast);
+    --er: var(--sw-error);
+    --erc: var(--sw-error-contrast);
+    --in: var(--sw-info);
+    --inc: var(--sw-info-contrast);
+    --brd: var(--sw-border);
+    --brd-s: var(--sw-border-strong);
+    --sb: var(--sw-sidebar-bg);
+    --th-bg: var(--sw-table-header-bg);
+    --th-color: var(--sw-table-header-text);
+    --btn-text: var(--sw-button-text);
+    --auth-bg: var(--sw-auth-bg);
+    --auth-card: var(--sw-auth-card-bg);
+}
+
+@supports (background: color-mix(in srgb, red 1%, blue)) {
+    :root {
+        --sw-border: 1px solid color-mix(in srgb, var(--sw-secondary) 28%, transparent);
+        --sw-border-strong: 1px solid color-mix(in srgb, var(--sw-secondary) 50%, transparent);
+    }
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+    --sw-bg: #2a3040;
+    --sw-surface: #222736;
+    --sw-text: #e8ecf4;
+    --sw-text-muted: #9ca3af;
+    --sw-primary: #7da4e0;
+    --sw-secondary: #9dbde8;
+    --sw-accent: #fb8dc0;
+    --sw-success: #00d390;
+    --sw-warning: #fcb700;
+    --sw-error: #ff627d;
+    --sw-info: #00bafe;
+    --sw-border: 1px solid rgba(255, 255, 255, 0.09);
+    --sw-sidebar-bg: #111520;
+    --sw-table-header-bg: #1a2340;
+    --sw-table-header-text: #7da4e0;
+    --sw-table-sticky-border: #8194b8;
+    --sw-button-text: #1a1f2e;
+    --sw-auth-bg: #1b2030;
+    --sw-auth-card-bg: #222736;
+
+    --b1: var(--sw-bg);
+    --b2: var(--sw-surface);
+    --bc: var(--sw-text);
+    --bc2: var(--sw-text-muted);
+    --p: var(--sw-primary);
+    --s: var(--sw-secondary);
+    --a: var(--sw-accent);
+    --su: var(--sw-success);
+    --wa: var(--sw-warning);
+    --er: var(--sw-error);
+    --in: var(--sw-info);
+    --brd: var(--sw-border);
+    --sb: var(--sw-sidebar-bg);
+    --th-bg: var(--sw-table-header-bg);
+    --th-color: var(--sw-table-header-text);
+    --btn-text: var(--sw-button-text);
+    --auth-bg: var(--sw-auth-bg);
+    --auth-card: var(--sw-auth-card-bg);
+}
+
+/* ===== src/tokens/spacing.css ===== */
+/* Espaciado, radios y sombras — consenso de las 4 apps, con un solo cambio:
+   --sw-radius-pill pasa de 25px a 9999px (era el único radio en px de una
+   escala en rem; con textos más grandes 25px deja de verse como píldora). */
+:root {
+    --sw-radius-sm: 0.25rem;
+    --sw-radius-md: 0.65rem;
+    --sw-radius-lg: 1.1rem;
+    --sw-radius-pill: 9999px;
+
+    --sw-spacing-xs: 0.25rem;
+    --sw-spacing-sm: 0.5rem;
+    --sw-spacing-md: 1rem;
+    --sw-spacing-lg: 1.5rem;
+    --sw-spacing-xl: 2rem;
+
+    --sw-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --sw-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --sw-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.14);
+
+    /* Alias cortos — ver nota en _color.scss, misma regla: no renombrar. */
+    --r: var(--sw-radius-md);
+    --rl: var(--sw-radius-lg);
+    --sh-sm: var(--sw-shadow-sm);
+    --sh-md: var(--sw-shadow-md);
+    --sh-lg: var(--sw-shadow-lg);
+}
+
+/* ===== src/tokens/typography.css ===== */
+/* Tokens tipográficos — NUEVO. Ninguna de las 4 apps los tenía. Escala
+   derivada de los px que YA usan las apps (no inventada): 14px es el tamaño de trabajo real
+   (30 usos en Sofficon), 13px el segundo más común (22 usos), etc.
+
+   En px, no en rem: evita el enredo de la base 14px (gesnom, legacy) vs 16px
+   (las 3 apps migradas). Con px, --sw-text-base se ve igual en las 4 sin
+   tocar la base de `html`. */
+:root {
+    --sw-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --sw-text-3xs:  10px;   /*  1 uso hoy  — etiqueta bajo dona (dashboard) */
+    --sw-text-2xs:  11px;   /*  7 usos hoy — badges, notas al pie      */
+    --sw-text-xs:   12px;   /* 15 usos     — labels, hints             */
+    --sw-text-sm:   13px;   /* 22 usos     — tablas, texto secundario  */
+    --sw-text-base: 14px;   /* 30 usos     — texto de trabajo          */
+    --sw-text-md:   15px;   /* 21 usos     — inputs, botones           */
+    --sw-text-lg:   16px;   /*             — títulos de card           */
+    --sw-text-lg-plus: 18px; /*              — legado intermedio          */
+    --sw-text-xl:   20px;   /*             — título de página          */
+    --sw-text-2xl:  22px;   /*             — cifras de dashboard       */
+    --sw-text-3xl:  28px;   /*             — KPI grandes               */
+
+    --sw-font-normal: 400;
+    --sw-font-medium: 500;
+    --sw-font-semibold: 600;
+    --sw-font-bold: 700;
+
+    --sw-leading-tight: 1.25;
+    --sw-leading-base: 1.6;
+}
+
+/* html { font-size: 16px } se mantiene como en las 3 apps migradas — no
+   cambia aquí. gesnom sube de su 14px legacy a 16px sin efecto visible
+   porque los componentes ya no dependen de la base (usan los tokens de
+   arriba en px absolutos, no en em/rem relativos a html). */
+html {
+    font-family: var(--sw-font-sans);
+    font-size: 16px;
+    line-height: var(--sw-leading-base);
+}
+
+/* ===== src/tokens/z-index.css ===== */
+/* Escala de z-index — NUEVA. Ninguna de las 4 apps la tenía: cada
+   componente ponía su número suelto sin relación con los demás (visto en
+   forms.css, navigation.css, modal.css, toast.css, tables.css).
+
+   Encontrado al auditar: .sw-row-menu-dropdown.is-portal (tables.css) tenía
+   z-index: 3000 — por encima del backdrop de modal (1060) y del toast
+   (1080). Es el mismo menú que .sw-row-menu-dropdown normal (sin portal,
+   capa dropdown), solo que se posiciona fixed para escapar de un
+   contenedor con overflow. No hay razón de producto para que supere a un
+   modal o a un toast; si un modal se abre con ese menú todavía abierto, el
+   menú se dibujaba encima. Se corrige alineándolo a la misma capa
+   dropdown que su variante no-portal.
+
+   Los z-index de tables.css (1/2/3) para thead/columna sticky NO están acá:
+   son orden relativo dentro de la propia tabla (quién tapa a quién entre
+   celdas), no una capa global de la página. Tocarlos no es un problema de
+   customización, es implementación interna. */
+:root {
+    --sw-z-sidebar-backdrop: 50;  /* 1 uso — fondo oscuro detrás del sidebar movil */
+    --sw-z-sidebar: 60;           /* 1 uso — panel del sidebar movil (sobre su backdrop) */
+    --sw-z-sticky: 40;            /* 1 uso — navbar superior con position: sticky */
+    --sw-z-dropdown: 100;         /* 4 usos — select, menu de usuario, menu de fila (con y sin portal) */
+    --sw-z-modal-backdrop: 1060;  /* 1 uso */
+    --sw-z-toast: 1080;           /* 1 uso */
+}
+
+/* ===== src/base/reset.css ===== */
+/* Reset — de Sofficon base.css. font-family/font-size/line-height de html
+   viven en tokens/_typography.scss; aquí solo el reset de caja y la
+   aplicación de los tokens de color a html/body. */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background: var(--b1);
+    color: var(--bc);
+    transition:
+        background 0.25s,
+        color 0.25s;
+}
+
+body {
+    font-family: var(--sw-font-sans) !important;
+}
+
+/* Collapse propio (ver swToggleCollapse en soffi-ui.js). Se conservan los
+   nombres .collapse/.show porque las vistas ya los usan; sin estas reglas el
+   contenido queda siempre visible, que es como estaba antes de tener JS
+   propio. */
+.collapse:not(.show) {
+    display: none;
+}
+
+/* Reset de los contenedores .main / .container-fluid que las vistas
+   heredaron del template viejo (Bootstrap/CoreUI). Vivían en
+   adapters/bootstrap-4.css, eliminado al sacar Bootstrap del proyecto. */
+.sw-main > .main {
+    margin: 0;
+    padding: 0;
+    min-height: auto;
+    background: transparent;
+}
+
+.sw-main > .main > .container-fluid {
+    padding: 0;
+}
+
+/* ===== src/base/utilities.css ===== */
+/* Utilidades — de Sofficon base.css (superset estricto de SoffCaja/SoffiFac).
+   Reemplazan las de Bootstrap (text-*, d-*, spacing, border) para no
+   depender de una hoja de estilos ajena. */
+
+/* .text-center/.text-right/.text-left (sin prefijo sw-) se alían aquí: son
+   nombres de utilidad Bootstrap que muchas vistas heredadas ya usan; sin
+   este alias quedan sin CSS y el contenido se ve siempre alineado a la
+   izquierda. */
+.sw-text-center,
+.text-center {
+    text-align: center;
+}
+
+.sw-text-right,
+.text-right {
+    text-align: right;
+}
+
+.sw-text-left,
+.text-left {
+    text-align: left;
+}
+
+.sw-font-bold { font-weight: var(--sw-font-bold); }
+.sw-font-semibold { font-weight: var(--sw-font-semibold); }
+.sw-text-3xs { font-size: var(--sw-text-3xs); }
+.sw-text-2xs { font-size: var(--sw-text-2xs); }
+.sw-text-xs { font-size: var(--sw-text-xs); }
+.sw-text-sm { font-size: var(--sw-text-sm); }
+.sw-text-base { font-size: var(--sw-text-base); }
+.sw-text-md { font-size: var(--sw-text-md); }
+.sw-text-lg { font-size: var(--sw-text-lg); }
+.sw-text-lg-plus { font-size: var(--sw-text-lg-plus); }
+.sw-text-xl { font-size: var(--sw-text-xl); }
+.sw-text-2xl { font-size: var(--sw-text-2xl); }
+.sw-text-3xl { font-size: var(--sw-text-3xl); }
+.sw-small { font-size: var(--sw-text-sm); }
+.sw-nowrap { white-space: nowrap; }
+
+.sw-d-flex { display: flex; }
+.sw-d-grid { display: grid; }
+.sw-d-block { display: block; }
+.sw-d-none { display: none; }
+.sw-flex-wrap { flex-wrap: wrap; }
+.sw-flex-grow-1 { flex-grow: 1; }
+.sw-gap-2 { gap: 0.5rem; }
+.sw-gap-3 { gap: 1rem; }
+
+.sw-border-0 { border: 0; }
+.sw-border-bottom { border-bottom: var(--brd); }
+
+.sw-border-primary {
+    border-color: rgba(40, 68, 154, 0.35);
+    border-color: color-mix(in srgb, var(--p) 35%, transparent);
+}
+
+.sw-border-success {
+    border-color: rgba(0, 186, 123, 0.4);
+    border-color: color-mix(in srgb, var(--su) 40%, transparent);
+}
+
+.sw-bg-success { background: var(--su); }
+
+.sw-text-muted { color: var(--bc2); }
+.sw-text-success { color: var(--su); }
+.sw-text-primary { color: var(--p); }
+.sw-text-info { color: var(--in); }
+.sw-text-warning { color: var(--wa); }
+.sw-text-error { color: var(--er); }
+.sw-text-inverse { color: var(--pc); }
+.sw-text-uppercase { text-transform: uppercase; }
+
+.sw-p-0 { padding: 0; }
+.sw-p-3 { padding: 1rem; }
+.sw-my-3 { margin-top: 1rem; margin-bottom: 1rem; }
+.sw-my-4 { margin-top: 1.5rem; margin-bottom: 1.5rem; }
+
+/* Escala de espaciado: 0=0, 1=.25rem, 2=.5rem, 3=1rem, 4=1.5rem, 5=3rem */
+.sw-mt-0 { margin-top: 0; }
+.sw-mt-1 { margin-top: 0.25rem; }
+.sw-mt-2 { margin-top: 0.5rem; }
+.sw-mt-3 { margin-top: 1rem; }
+.sw-mt-4 { margin-top: 1.5rem; }
+.sw-mt-5 { margin-top: 3rem; }
+.sw-mt-auto { margin-top: auto; }
+
+.sw-mb-0 { margin-bottom: 0; }
+.sw-mb-1 { margin-bottom: 0.25rem; }
+.sw-mb-2 { margin-bottom: 0.5rem; }
+.sw-mb-3 { margin-bottom: 1rem; }
+.sw-mb-4 { margin-bottom: 1.5rem; }
+.sw-mb-5 { margin-bottom: 3rem; }
+
+.sw-mr-0 { margin-right: 0; }
+.sw-mr-2 { margin-right: 0.5rem; }
+.sw-mr-3 { margin-right: 1rem; }
+
+.sw-ml-0 { margin-left: 0; }
+.sw-ml-2 { margin-left: 0.5rem; }
+
+.sw-pt-3 { padding-top: 1rem; }
+.sw-pt-4 { padding-top: 1.5rem; }
+
+.sw-pb-0 { padding-bottom: 0; }
+.sw-pb-3 { padding-bottom: 1rem; }
+.sw-pb-4 { padding-bottom: 1.5rem; }
+
+.sw-px-4 { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+.sw-py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.sw-py-3 { padding-top: 1rem; padding-bottom: 1rem; }
+.sw-py-5 { padding-top: 3rem; padding-bottom: 3rem; }
+
+/* Alineación flex — para .sw-row, .sw-d-flex o cualquier contenedor flex */
+.sw-justify-content-start { justify-content: flex-start; }
+.sw-justify-content-end { justify-content: flex-end; }
+.sw-justify-content-center { justify-content: center; }
+.sw-justify-content-between { justify-content: space-between; }
+.sw-justify-content-around { justify-content: space-around; }
+
+.sw-align-items-start { align-items: flex-start; }
+.sw-align-items-end { align-items: flex-end; }
+.sw-align-items-center { align-items: center; }
+.sw-align-items-stretch { align-items: stretch; }
+
+.sw-align-self-start { align-self: flex-start; }
+.sw-align-self-end { align-self: flex-end; }
+.sw-align-self-center { align-self: center; }
+
+.sw-flex-column { flex-direction: column; }
+.sw-flex-row { flex-direction: row; }
+
+.sw-h-100 { height: 100%; }
+
+/* Variantes responsive de dirección/alineación flex. Se usan sobre todo en
+   cabeceras de card (título a la izquierda, badge o acciones a la derecha)
+   que en móvil deben apilarse. Breakpoints alineados a los de sw-col-*. */
+@media (min-width: 576px) {
+    .sw-flex-sm-row { flex-direction: row; }
+    .sw-align-items-sm-center { align-items: center; }
+    .sw-mb-sm-0 { margin-bottom: 0; }
+    .sw-mt-sm-0 { margin-top: 0; }
+    .sw-ml-sm-2 { margin-left: 0.5rem; }
+    .sw-mr-sm-2 { margin-right: 0.5rem; }
+}
+
+@media (min-width: 768px) {
+    .sw-flex-md-row { flex-direction: row; }
+    .sw-align-items-md-center { align-items: center; }
+    .sw-align-items-md-start { align-items: flex-start; }
+    .sw-mb-md-0 { margin-bottom: 0; }
+    .sw-mt-md-0 { margin-top: 0; }
+}
+
+@media (min-width: 992px) {
+    .sw-flex-lg-row { flex-direction: row; }
+    .sw-align-items-lg-center { align-items: center; }
+    .sw-align-items-lg-start { align-items: flex-start; }
+    .sw-justify-content-lg-end { justify-content: flex-end; }
+    .sw-mb-lg-0 { margin-bottom: 0; }
+    .sw-mt-lg-0 { margin-top: 0; }
+    .sw-mr-lg-3 { margin-right: 1rem; }
+}
+
+@media (min-width: 1200px) {
+    .sw-mb-xl-0 { margin-bottom: 0; }
+    .sw-mt-xl-0 { margin-top: 0; }
+}
+
+/* ===== src/components/accordion.css ===== */
+/* Accordion visual — collapse semántico con estado claro/oscuro y teclado. */
+.sw-accordion {
+    width: 100%;
+    overflow: hidden;
+    border: var(--brd);
+    border-radius: var(--rl);
+    background: var(--b1);
+}
+
+.sw-accordion-item + .sw-accordion-item {
+    border-top: var(--brd);
+}
+
+.sw-accordion-trigger {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sw-spacing-md);
+    padding: var(--sw-spacing-md) var(--sw-spacing-lg);
+    border: 0;
+    background: var(--b1);
+    color: var(--bc);
+    font: inherit;
+    font-weight: var(--sw-font-semibold);
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.sw-accordion-trigger:hover,
+.sw-accordion-trigger[aria-expanded="true"] {
+    background: var(--b2);
+    color: var(--p);
+}
+
+.sw-accordion-trigger:focus-visible {
+    outline: 2px solid var(--a);
+    outline-offset: -2px;
+}
+
+.sw-accordion-trigger-icon {
+    flex: 0 0 auto;
+    transition: transform 0.15s;
+}
+
+.sw-accordion-trigger[aria-expanded="true"] .sw-accordion-trigger-icon {
+    transform: rotate(180deg);
+}
+
+.sw-accordion-panel {
+    padding: 0 var(--sw-spacing-lg) var(--sw-spacing-lg);
+    background: var(--b1);
+    color: var(--bc2);
+    line-height: var(--sw-leading-base);
+}
+
+.sw-accordion-panel-inner {
+    padding-top: var(--sw-spacing-sm);
+}
+
+.sw-accordion-panel.collapse:not(.show) {
+    display: none;
+}
+
+@media (max-width: 575.98px) {
+    .sw-accordion-trigger {
+        padding: var(--sw-spacing-md);
+    }
+
+    .sw-accordion-panel {
+        padding-right: var(--sw-spacing-md);
+        padding-left: var(--sw-spacing-md);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sw-accordion-trigger,
+    .sw-accordion-trigger-icon {
+        transition: none;
+    }
+}
+
+/* ===== src/components/action-card.css ===== */
+/* Action card — icono arriba, título, descripción, botón de ancho completo.
+   Componente nuevo: ninguna de las 4 apps lo tenía (el más cercano era
+   .sw-quicklink, horizontal y sin botón — ver dashboard.css). Pensado para
+   pantallas de selección de acción: "Importar datos", accesos a módulos,
+   selección de tipo de operación.
+
+   El botón (.sw-action-card-action) es outline/ghost, no sólido: toma el
+   color del icono de su misma card (icon-primary/secondary/accent/success/
+   warning/info) via combinador de hermanos, así que no hace falta
+   sw-btn-primary en el markup — si igual queda de código viejo no molesta,
+   el selector scoped le gana en especificidad. Antes de v0.1.1 era
+   sw-btn-primary sólido: una barra azul repetida en cada card del grid.
+
+   Modificadores de tamaño (agregar junto a .sw-action-card-action):
+   - .sw-action-card-action-sm  → chico, centrado (align-self: center)
+   - .sw-action-card-action-xs  → muy chico, pegado a la derecha
+                                   (align-self: flex-end)
+   Sin modificador: ancho completo (comportamiento original).
+
+   <div class="sw-action-card-grid">
+       <div class="sw-action-card">
+           <div class="sw-action-card-icon sw-action-card-icon-primary">
+               <i class="fa-solid fa-building"></i>
+           </div>
+           <h3 class="sw-action-card-title">Departamentos</h3>
+           <p class="sw-action-card-desc">Importa o actualiza la lista de
+               departamentos desde un archivo Excel/CSV.</p>
+           <a href="..." class="sw-btn sw-action-card-action">
+               <i class="fa-solid fa-file-import"></i> Ir a importación
+           </a>
+       </div>
+   </div>
+
+   Variante deshabilitada (ej. "Próximamente"): agregar
+   .sw-action-card-disabled a .sw-action-card y omitir el <a>, o usar un
+   <span> en su lugar — no hay JS que lo requiera. */
+
+/* Tamaño de columna y cantidad de columnas, personalizables sin editar este
+   archivo — dos custom properties con fallback, pisables desde el HTML
+   (style="--sw-grid-min: 300px") o desde el CSS de la app consumidora:
+
+   --sw-grid-min  ancho minimo de cada card antes de que el grid meta otra
+                  columna (lo que hace repeat(auto-fit, minmax(...))). Los
+                  modificadores -sm/-lg de abajo solo cambian este valor.
+   --sw-grid-cols cantidad fija de columnas, ignorando el ancho disponible.
+                  Vacio por defecto (auto-fit decide). Ej.:
+                  <div class="sw-action-card-grid" style="--sw-grid-cols: 3">
+
+   Mismo mecanismo en .sw-metrics-grid/.sw-quicklink-grid (dashboard.css),
+   .sw-product-card-grid (product-card.css) y .sw-profile-card-grid
+   (profile-card.css) — cada uno con su propio --sw-grid-min base, porque el
+   contenido de cada card ocupa distinto espacio minimo. */
+.sw-action-card-grid {
+    --sw-grid-min: 230px;
+    display: grid;
+    grid-template-columns: repeat(var(--sw-grid-cols, auto-fit), minmax(var(--sw-grid-min), 1fr));
+    gap: 1.1rem;
+}
+
+.sw-action-card-grid-sm {
+    --sw-grid-min: 180px;
+}
+
+.sw-action-card-grid-lg {
+    --sw-grid-min: 280px;
+}
+
+.sw-action-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1.4rem;
+    background: var(--b1);
+    border: var(--brd);
+    border-radius: var(--rl);
+    text-align: center;
+    transition: box-shadow 0.18s, border-color 0.18s;
+}
+
+.sw-action-card:hover {
+    box-shadow: var(--sh-md);
+}
+
+/* --sw-action-card-icon-size pisable (style="--sw-action-card-icon-size: 64px")
+   sin editar este archivo — mismo criterio que --sw-grid-min/--sw-grid-cols
+   de arriba, aplicado ahora al tamaño del icono en vez del grid. Mismo
+   patron en .sw-metric-icon/.sw-quicklink-icon/.sw-activity-icon
+   (dashboard.css), .sw-table-thumb (tables.css), .sw-auth-mark (auth.css)
+   y .sw-user-avatar (navigation.css). */
+.sw-action-card-icon {
+    --sw-action-card-icon-size: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--sw-action-card-icon-size);
+    height: var(--sw-action-card-icon-size);
+    margin: 0 auto 0.9rem;
+    border-radius: var(--r);
+    font-size: var(--sw-text-xl);
+}
+
+.sw-action-card-title {
+    margin: 0 0 0.4rem;
+    font-size: var(--sw-text-md);
+    font-weight: var(--sw-font-semibold);
+    color: var(--p);
+    line-height: var(--sw-leading-tight);
+}
+
+.sw-action-card-desc {
+    flex: 1 1 auto;
+    margin: 0 0 1.1rem;
+    font-size: var(--sw-text-sm);
+    color: var(--bc2);
+    line-height: var(--sw-leading-base);
+}
+
+/* Ghost/outline en vez de solido: una card con boton solido de ancho
+   completo se lee como formulario, no como tile, y repetido en grid se
+   vuelve una fila de barras de color. El selector va scoped
+   (.sw-action-card .sw-action-card-action, especificidad 0,2,0) para
+   ganarle a .sw-btn-primary (0,1,0) sin tocar el markup existente que aun
+   traiga esa clase. */
+.sw-action-card .sw-action-card-action {
+    width: 100%;
+    justify-content: center;
+    gap: 6px;
+    padding: 0.5rem 1rem;
+    font-size: var(--sw-text-sm);
+    background: transparent;
+    color: var(--bc2);
+    border: var(--brd);
+    box-shadow: none;
+}
+
+.sw-action-card .sw-action-card-action:hover {
+    background: var(--b2);
+    opacity: 1;
+    box-shadow: none;
+}
+
+/* Modificadores de tamaño — el boton por defecto es ancho completo; estos
+   lo encogen y lo sacan del stretch (el padre es flex-column sin
+   align-items, o sea stretch por defecto). Compuestos con la clase base
+   (.sw-action-card-action.sw-action-card-action-sm) para empatar su
+   especificidad y poder pisar width/padding/font-size. */
+.sw-action-card-action.sw-action-card-action-sm {
+    width: auto;
+    align-self: center;
+    padding: 0.4rem 0.85rem;
+    font-size: var(--sw-text-xs);
+}
+
+.sw-action-card-action.sw-action-card-action-xs {
+    width: auto;
+    align-self: flex-end;
+    gap: 4px;
+    padding: 0.3rem 0.65rem;
+    font-size: var(--sw-text-2xs);
+}
+
+.sw-action-card .sw-action-card-action::after {
+    content: "\2192";
+    transition: transform 0.15s;
+}
+
+.sw-action-card .sw-action-card-action:hover::after {
+    transform: translateX(3px);
+}
+
+/* Variante deshabilitada — para acciones "Próximamente". El contenido baja
+   de opacidad y el botón se reemplaza por un input/span deshabilitado
+   (ver ejemplo de uso arriba); no lleva pointer-events:none en la card
+   entera para no bloquear un tooltip que la explique. */
+.sw-action-card-disabled {
+    opacity: 0.6;
+}
+
+.sw-action-card-disabled .sw-action-card-icon {
+    background: var(--b2);
+    color: var(--bc2);
+}
+
+/* Colores del icono — mismo criterio que .sw-metric-icon-* (dashboard.css):
+   fondo al 14-16% del color, icono oscurecido en claro y vuelto al token
+   puro en oscuro. Import.md pedía variedad de color por tipo de dato
+   (institución, personas, categorías, activos, transporte, inventario). */
+.sw-action-card-icon-primary {
+    background: rgba(40, 68, 154, 0.14);
+    background: color-mix(in srgb, var(--p) 14%, transparent);
+    color: var(--p);
+}
+
+.sw-action-card-icon-secondary {
+    background: rgba(67, 97, 238, 0.16);
+    background: color-mix(in srgb, var(--s) 16%, transparent);
+    color: #2f44a7;
+    color: color-mix(in srgb, var(--s) 70%, #000);
+}
+
+.sw-action-card-icon-accent {
+    background: rgba(250, 117, 173, 0.16);
+    background: color-mix(in srgb, var(--a) 16%, transparent);
+    color: #bc5882;
+    color: color-mix(in srgb, var(--a) 75%, #000);
+}
+
+.sw-action-card-icon-success {
+    background: rgba(0, 186, 123, 0.16);
+    background: color-mix(in srgb, var(--su) 16%, transparent);
+    color: #00734c;
+    color: color-mix(in srgb, var(--su) 62%, #000);
+}
+
+.sw-action-card-icon-warning {
+    background: rgba(250, 151, 0, 0.16);
+    background: color-mix(in srgb, var(--wa) 16%, transparent);
+    color: #7d4c00;
+    color: color-mix(in srgb, var(--wa) 50%, #000);
+}
+
+.sw-action-card-icon-info {
+    background: rgba(0, 164, 242, 0.14);
+    background: color-mix(in srgb, var(--in) 14%, transparent);
+    color: #0073a9;
+    color: color-mix(in srgb, var(--in) 70%, #000);
+}
+
+/* Boton .sw-action-card-action toma el color del icono de su misma card
+   via combinador de hermanos (icono va siempre antes en el markup). Mismos
+   tonos oscurecidos que usa el icono en claro, para legibilidad de texto
+   sobre fondo blanco. */
+.sw-action-card-icon-primary ~ .sw-action-card-action {
+    color: var(--p);
+    border-color: rgba(40, 68, 154, 0.45);
+    border-color: color-mix(in srgb, var(--p) 45%, transparent);
+}
+
+.sw-action-card-icon-primary ~ .sw-action-card-action:hover {
+    background: rgba(40, 68, 154, 0.08);
+    background: color-mix(in srgb, var(--p) 8%, transparent);
+    border-color: var(--p);
+}
+
+.sw-action-card-icon-secondary ~ .sw-action-card-action {
+    color: #2f44a7;
+    color: color-mix(in srgb, var(--s) 70%, #000);
+    border-color: rgba(67, 97, 238, 0.45);
+    border-color: color-mix(in srgb, var(--s) 45%, transparent);
+}
+
+.sw-action-card-icon-secondary ~ .sw-action-card-action:hover {
+    background: rgba(67, 97, 238, 0.08);
+    background: color-mix(in srgb, var(--s) 8%, transparent);
+    border-color: var(--s);
+}
+
+.sw-action-card-icon-accent ~ .sw-action-card-action {
+    color: #bc5882;
+    color: color-mix(in srgb, var(--a) 75%, #000);
+    border-color: rgba(250, 117, 173, 0.45);
+    border-color: color-mix(in srgb, var(--a) 45%, transparent);
+}
+
+.sw-action-card-icon-accent ~ .sw-action-card-action:hover {
+    background: rgba(250, 117, 173, 0.1);
+    background: color-mix(in srgb, var(--a) 10%, transparent);
+    border-color: var(--a);
+}
+
+.sw-action-card-icon-success ~ .sw-action-card-action {
+    color: #00734c;
+    color: color-mix(in srgb, var(--su) 62%, #000);
+    border-color: rgba(0, 186, 123, 0.45);
+    border-color: color-mix(in srgb, var(--su) 45%, transparent);
+}
+
+.sw-action-card-icon-success ~ .sw-action-card-action:hover {
+    background: rgba(0, 186, 123, 0.08);
+    background: color-mix(in srgb, var(--su) 8%, transparent);
+    border-color: var(--su);
+}
+
+.sw-action-card-icon-warning ~ .sw-action-card-action {
+    color: #7d4c00;
+    color: color-mix(in srgb, var(--wa) 50%, #000);
+    border-color: rgba(250, 151, 0, 0.45);
+    border-color: color-mix(in srgb, var(--wa) 45%, transparent);
+}
+
+.sw-action-card-icon-warning ~ .sw-action-card-action:hover {
+    background: rgba(250, 151, 0, 0.1);
+    background: color-mix(in srgb, var(--wa) 10%, transparent);
+    border-color: var(--wa);
+}
+
+.sw-action-card-icon-info ~ .sw-action-card-action {
+    color: #0073a9;
+    color: color-mix(in srgb, var(--in) 70%, #000);
+    border-color: rgba(0, 164, 242, 0.45);
+    border-color: color-mix(in srgb, var(--in) 45%, transparent);
+}
+
+.sw-action-card-icon-info ~ .sw-action-card-action:hover {
+    background: rgba(0, 164, 242, 0.08);
+    background: color-mix(in srgb, var(--in) 8%, transparent);
+    border-color: var(--in);
+}
+
+[data-theme="dark"] .sw-action-card-icon-secondary {
+    color: var(--s);
+}
+
+[data-theme="dark"] .sw-action-card-icon-accent {
+    color: var(--a);
+}
+
+[data-theme="dark"] .sw-action-card-icon-success {
+    color: var(--su);
+}
+
+[data-theme="dark"] .sw-action-card-icon-warning {
+    color: var(--wa);
+}
+
+[data-theme="dark"] .sw-action-card-icon-info {
+    color: var(--in);
+}
+
+[data-theme="dark"] .sw-action-card-icon-secondary ~ .sw-action-card-action {
+    color: var(--s);
+    border-color: rgba(67, 97, 238, 0.55);
+    border-color: color-mix(in srgb, var(--s) 55%, transparent);
+}
+
+[data-theme="dark"] .sw-action-card-icon-accent ~ .sw-action-card-action {
+    color: var(--a);
+    border-color: rgba(250, 117, 173, 0.55);
+    border-color: color-mix(in srgb, var(--a) 55%, transparent);
+}
+
+[data-theme="dark"] .sw-action-card-icon-success ~ .sw-action-card-action {
+    color: var(--su);
+    border-color: rgba(0, 186, 123, 0.55);
+    border-color: color-mix(in srgb, var(--su) 55%, transparent);
+}
+
+[data-theme="dark"] .sw-action-card-icon-warning ~ .sw-action-card-action {
+    color: var(--wa);
+    border-color: rgba(250, 151, 0, 0.55);
+    border-color: color-mix(in srgb, var(--wa) 55%, transparent);
+}
+
+[data-theme="dark"] .sw-action-card-icon-info ~ .sw-action-card-action {
+    color: var(--in);
+    border-color: rgba(0, 164, 242, 0.55);
+    border-color: color-mix(in srgb, var(--in) 55%, transparent);
+}
+
+/* ===== src/components/alerts.css ===== */
+/* Alertas embebidas (bloque fijo dentro de la página)
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--r);
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.sw-alert-info {
+    background: rgba(0, 164, 242, 0.1);
+    background: color-mix(in srgb, var(--in) 10%, transparent);
+    border: 1px solid rgba(0, 164, 242, 0.22);
+    border: 1px solid color-mix(in srgb, var(--in) 22%, transparent);
+    color: #0070a5;
+    color: color-mix(in srgb, var(--in) 68%, #000);
+}
+
+.sw-alert-success {
+    background: rgba(0, 186, 123, 0.1);
+    background: color-mix(in srgb, var(--su) 10%, transparent);
+    border: 1px solid rgba(0, 186, 123, 0.22);
+    border: 1px solid color-mix(in srgb, var(--su) 22%, transparent);
+    color: #00734c;
+    color: color-mix(in srgb, var(--su) 62%, #000);
+}
+
+.sw-alert-warning {
+    background: rgba(250, 151, 0, 0.12);
+    background: color-mix(in srgb, var(--wa) 12%, transparent);
+    border: 1px solid rgba(250, 151, 0, 0.26);
+    border: 1px solid color-mix(in srgb, var(--wa) 26%, transparent);
+    color: #7d4c00;
+    color: color-mix(in srgb, var(--wa) 50%, #000);
+}
+
+.sw-alert-error {
+    background: rgba(225, 29, 72, 0.08);
+    background: color-mix(in srgb, var(--er) 8%, transparent);
+    border: 1px solid rgba(225, 29, 72, 0.18);
+    border: 1px solid color-mix(in srgb, var(--er) 18%, transparent);
+    color: var(--er);
+}
+
+[data-theme="dark"] .sw-alert-info {
+    color: var(--in);
+}
+
+[data-theme="dark"] .sw-alert-success {
+    color: var(--su);
+}
+
+[data-theme="dark"] .sw-alert-warning {
+    color: var(--wa);
+}
+
+/* ===== src/components/animations.css ===== */
+/* Keyframes
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+@keyframes sw-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.sw-fade-in {
+    animation: sw-fade-in 0.22s ease-out both;
+}
+
+/* ===== src/components/auth.css ===== */
+/* Pantallas de autenticación (login, selección de empresa, recuperar clave)
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+/* ── Pantallas de acceso (login, seleccion de empresa, recuperar clave...) ── */
+.sw-auth-page {
+    background: var(--b2);
+    min-height: 100vh;
+}
+
+.sw-auth-page-brand {
+    background: var(--p);
+}
+
+.sw-auth-page-soft {
+    background: var(--b2);
+}
+
+.sw-auth-shell {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--sw-spacing-lg);
+    width: 100%;
+}
+
+.sw-auth-card {
+    background: var(--b2);
+    max-width: 420px;
+    width: 100%;
+}
+
+.sw-auth-card-product {
+    background: var(--b1);
+    border-color: rgba(40, 68, 154, 0.18);
+    border-color: color-mix(in srgb, var(--p) 18%, transparent);
+    padding: var(--sw-spacing-xl);
+    box-shadow: var(--sh-lg);
+}
+
+.sw-auth-card-framed {
+    padding: 0;
+    overflow: hidden;
+}
+
+.sw-auth-card-plain {
+    background: var(--b1);
+}
+
+.sw-auth-card-wide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 420px);
+    max-width: 980px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.sw-auth-visual {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--sw-spacing-lg);
+    min-width: 0;
+    padding: var(--sw-spacing-xl);
+    background: var(--b2);
+    border-right: var(--brd);
+}
+
+.sw-auth-system {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+}
+
+/* --sw-auth-mark-size pisable — mismo criterio que --sw-action-card-icon-size
+   (ver la nota completa en action-card.css). */
+.sw-auth-mark {
+    --sw-auth-mark-size: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--sw-auth-mark-size);
+    height: var(--sw-auth-mark-size);
+    border-radius: var(--r);
+    background: #e3e7f3;
+    background: color-mix(in srgb, var(--p) 12%, var(--b1));
+    color: var(--p);
+    font-size: var(--sw-text-xl);
+}
+
+.sw-auth-system-text {
+    min-width: 0;
+}
+
+.sw-auth-system-name {
+    display: block;
+    overflow: hidden;
+    color: var(--bc);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sw-auth-system-subtitle {
+    display: block;
+    color: var(--bc2);
+    font-size: var(--sw-text-sm);
+    line-height: 1.35;
+}
+
+.sw-auth-copy-block {
+    max-width: 520px;
+}
+
+.sw-auth-heading {
+    color: var(--bc);
+    font-size: var(--sw-text-3xl);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+}
+
+.sw-auth-copy {
+    color: var(--bc2);
+    font-size: var(--sw-text-md);
+    line-height: 1.55;
+}
+
+.sw-auth-feature-list {
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 1.35rem 0 0;
+    padding: 0;
+}
+
+.sw-auth-feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+    color: var(--bc);
+    font-size: var(--sw-text-base);
+    font-weight: 500;
+}
+
+.sw-auth-feature-list i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--r);
+    background: rgba(40, 68, 154, 0.1);
+    background: color-mix(in srgb, var(--p) 10%, transparent);
+    color: var(--p);
+    font-size: var(--sw-text-sm);
+}
+
+.sw-auth-illustration {
+    align-self: center;
+    max-width: min(360px, 100%);
+    width: 100%;
+}
+
+.sw-auth-illustration img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.sw-auth-form-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    padding: var(--sw-spacing-xl);
+    background: var(--b1);
+}
+
+.sw-auth-form-head {
+    margin-bottom: var(--sw-spacing-lg);
+}
+
+.sw-auth-form-title {
+    color: var(--bc);
+    font-size: var(--sw-text-2xl);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+}
+
+.sw-auth-form-copy {
+    color: var(--bc2);
+    font-size: var(--sw-text-base);
+    line-height: 1.45;
+}
+
+.sw-auth-card-header {
+    background: var(--p);
+    color: var(--btn-text);
+    padding: 1.65rem 1.75rem;
+    text-align: center;
+}
+
+.sw-auth-card-eyebrow {
+    color: rgba(253, 253, 255, 0.76);
+    color: color-mix(in srgb, var(--btn-text) 76%, transparent);
+    display: block;
+    font-size: var(--sw-text-xs);
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 0.45rem;
+    text-transform: uppercase;
+}
+
+.sw-auth-card-header-title {
+    color: var(--btn-text);
+    font-size: var(--sw-text-2xl);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.sw-auth-card-header-subtitle {
+    color: rgba(253, 253, 255, 0.82);
+    color: color-mix(in srgb, var(--btn-text) 82%, transparent);
+    font-size: var(--sw-text-base);
+    line-height: 1.45;
+    margin: 0.55rem 0 0;
+}
+
+.sw-auth-card-body {
+    padding: 1.75rem;
+}
+
+.sw-auth-brand {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--sw-spacing-md);
+}
+
+.sw-auth-logo {
+    height: 56px;
+    width: auto;
+}
+
+.sw-auth-logo-lg {
+    height: 68px;
+}
+
+.sw-auth-title {
+    font-size: var(--sw-text-xl);
+    text-align: center;
+}
+
+.sw-auth-subtitle {
+    font-size: var(--sw-text-base);
+    margin-bottom: 1.4rem;
+    text-align: center;
+}
+
+.sw-auth-submit {
+    justify-content: center;
+    margin-top: var(--sw-spacing-sm);
+    width: 100%;
+}
+
+.sw-auth-remember {
+    align-items: center;
+    color: var(--bc2);
+    cursor: pointer;
+    display: flex;
+    font-size: var(--sw-text-base);
+    gap: var(--sw-spacing-sm);
+    margin: 0.9rem 0 1.1rem;
+}
+
+.sw-auth-input-group {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+.sw-auth-input-addon {
+    align-items: center;
+    background: var(--b2);
+    border: 1.5px solid rgba(67, 97, 238, 0.42);
+    border: 1.5px solid color-mix(in srgb, var(--s) 42%, transparent);
+    border-right: 0;
+    border-radius: var(--r) 0 0 var(--r);
+    color: var(--bc2);
+    display: inline-flex;
+    flex: 0 0 44px;
+    justify-content: center;
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s,
+        color 0.15s;
+}
+
+.sw-auth-input-group .sw-input,
+.sw-auth-input-group .sw-select {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.sw-auth-input-group:focus-within .sw-auth-input-addon {
+    border-color: var(--p);
+    box-shadow: 0 0 0 3px rgba(40, 68, 154, 0.12);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--p) 12%, transparent);
+    color: var(--p);
+}
+
+.sw-auth-input-group.sw-error .sw-auth-input-addon {
+    border-color: var(--er);
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.1);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--er) 10%, transparent);
+    color: var(--er);
+}
+
+.sw-auth-note {
+    background: #dde3f3;
+    background: color-mix(in srgb, var(--p) 8%, var(--b2));
+    border: var(--brd);
+    border-left: 3px solid var(--p);
+    border-radius: var(--r);
+    color: var(--bc2);
+    font-size: var(--sw-text-sm);
+    line-height: 1.45;
+    margin: var(--sw-spacing-md) 0;
+    padding: 0.85rem var(--sw-spacing-md);
+}
+
+.sw-auth-actions {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: var(--sw-spacing-md);
+}
+
+.sw-auth-footnote {
+    color: var(--bc2);
+    font-size: var(--sw-text-xs);
+    line-height: 1.45;
+    margin-top: var(--sw-spacing-md);
+    text-align: center;
+}
+
+@media (max-width: 767.98px) {
+    .sw-auth-shell {
+        align-items: flex-start;
+        padding: var(--sw-spacing-md);
+    }
+
+    .sw-auth-card-wide {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 460px;
+    }
+
+    .sw-auth-visual {
+        border-right: 0;
+        border-bottom: var(--brd);
+        padding: 1.25rem;
+    }
+
+    .sw-auth-heading {
+        font-size: var(--sw-text-2xl);
+    }
+
+    .sw-auth-copy,
+    .sw-auth-illustration {
+        display: none;
+    }
+
+    .sw-auth-feature-list {
+        margin-top: var(--sw-spacing-md);
+    }
+
+    .sw-auth-form-panel {
+        padding: 1.25rem;
+    }
+
+    .sw-auth-card-product {
+        padding: var(--sw-spacing-lg);
+    }
+
+    .sw-auth-card-framed {
+        padding: 0;
+    }
+
+    .sw-auth-card-header,
+    .sw-auth-card-body {
+        padding: 1.35rem;
+    }
+
+    .sw-auth-card-header-title {
+        font-size: var(--sw-text-xl);
+    }
+}
+
+/* ===== src/components/badges.css ===== */
+/* Badges de estado
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.28rem 0.8rem;
+    border-radius: var(--sw-radius-pill);
+    font-size: var(--sw-text-sm);
+    font-weight: 600;
+    line-height: 1;
+}
+
+.sw-badge-sm {
+    gap: 4px;
+    padding: 0.15rem 0.55rem;
+    font-size: var(--sw-text-2xs);
+}
+
+.sw-badge-lg {
+    gap: 6px;
+    padding: 0.4rem var(--sw-spacing-md);
+    font-size: var(--sw-text-base);
+}
+
+.sw-badge-primary {
+    background: rgba(40, 68, 154, 0.12);
+    background: color-mix(in srgb, var(--p) 12%, transparent);
+    color: var(--p);
+}
+
+.sw-badge-secondary {
+    background: rgba(67, 97, 238, 0.18);
+    background: color-mix(in srgb, var(--s) 18%, transparent);
+    color: #3249b2;
+    color: color-mix(in srgb, var(--s) 75%, #000);
+}
+
+.sw-badge-accent {
+    background: rgba(250, 117, 173, 0.15);
+    background: color-mix(in srgb, var(--a) 15%, transparent);
+    color: #c35b87;
+    color: color-mix(in srgb, var(--a) 78%, #000);
+}
+
+.sw-badge-success {
+    background: rgba(0, 186, 123, 0.14);
+    background: color-mix(in srgb, var(--su) 14%, transparent);
+    color: #00734c;
+    color: color-mix(in srgb, var(--su) 62%, #000);
+}
+
+.sw-badge-warning {
+    background: rgba(250, 151, 0, 0.16);
+    background: color-mix(in srgb, var(--wa) 16%, transparent);
+    color: #824f00;
+    color: color-mix(in srgb, var(--wa) 52%, #000);
+}
+
+.sw-badge-error {
+    background: rgba(225, 29, 72, 0.11);
+    background: color-mix(in srgb, var(--er) 11%, transparent);
+    color: var(--er);
+}
+
+.sw-badge-info {
+    background: rgba(0, 164, 242, 0.11);
+    background: color-mix(in srgb, var(--in) 11%, transparent);
+    color: #0070a5;
+    color: color-mix(in srgb, var(--in) 68%, #000);
+}
+
+[data-theme="dark"] .sw-badge-success {
+    color: var(--su);
+}
+
+[data-theme="dark"] .sw-badge-warning {
+    color: var(--wa);
+}
+
+[data-theme="dark"] .sw-badge-accent {
+    color: var(--a);
+}
+
+[data-theme="dark"] .sw-badge-secondary {
+    color: var(--s);
+}
+
+[data-theme="dark"] .sw-badge-info {
+    color: var(--in);
+}
+
+/* Insignia que queda solo con icono cuando falta espacio.
+   Marcar con .sw-badge-collapsible y envolver el texto en .sw-badge-label.
+   Dentro de un .sw-list-table-wrap, swSyncCollapsibleBadges() (soffi-ui.js)
+   agrega .is-badges-collapsed solo cuando la tabla con las insignias
+   completas no cabe en el ancho visible; no depende del ancho de la ventana.
+   Sin JS el texto se mantiene.
+   El texto sigue en el DOM, oculto solo visualmente, para lectores de
+   pantalla; agregar title para el resto. */
+.sw-list-table-wrap.is-badges-collapsed .sw-badge-collapsible {
+    /* relative: el label oculto es absolute y, sin un padre posicionado,
+       escapa del overflow del wrap y ensancha toda la pagina. */
+    position: relative;
+    min-width: 0;
+    padding-inline: 0.5rem;
+}
+
+.sw-list-table-wrap.is-badges-collapsed .sw-badge-collapsible i {
+    font-size: 9px;
+}
+
+.sw-list-table-wrap.is-badges-collapsed .sw-badge-collapsible .sw-badge-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* ===== src/components/breadcrumb.css ===== */
+/* Breadcrumb
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-breadcrumb-nav {
+    width: 100%;
+}
+
+.sw-breadcrumb {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    color: var(--bc2);
+    font-size: 0.9rem;
+}
+
+.sw-breadcrumb-item {
+    align-items: center;
+    display: inline-flex;
+    line-height: 1.4;
+}
+
+.sw-breadcrumb-item + .sw-breadcrumb-item::before {
+    content: "›";
+    margin: 0 0.55rem;
+    color: var(--bc2);
+    font-size: 1rem;
+}
+
+.sw-breadcrumb a {
+    align-items: center;
+    color: var(--p);
+    display: inline-flex;
+    gap: 0.35rem;
+    text-decoration: none;
+}
+
+.sw-breadcrumb a:hover,
+.sw-breadcrumb a:focus-visible {
+    text-decoration: underline;
+}
+
+.sw-breadcrumb-item.active {
+    color: var(--bc);
+    font-weight: 600;
+}
+
+.sw-breadcrumb-context {
+    color: var(--bc2);
+    white-space: nowrap;
+}
+
+/* ===== src/components/buttons.css ===== */
+/* Botones (.sw-btn) y botones-icono (.sw-bico)
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0.6rem 1.25rem;
+    font-family: "Inter", sans-serif;
+    font-size: var(--sw-text-md);
+    font-weight: 500;
+    border: none;
+    border-radius: var(--rl);
+    cursor: pointer;
+    transition:
+        opacity 0.15s,
+        box-shadow 0.15s;
+    color: var(--btn-text);
+    line-height: 1.4;
+    text-decoration: none;
+}
+
+.sw-btn:hover {
+    opacity: 0.9;
+    box-shadow: var(--sh-md);
+}
+
+.sw-btn:focus {
+    outline: 2px solid var(--a);
+    outline-offset: 2px;
+}
+
+.sw-btn:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.sw-btn-primary {
+    background: var(--p);
+}
+
+.sw-btn-accent {
+    background: var(--a);
+}
+
+.sw-btn-error {
+    background: var(--er);
+}
+
+.sw-btn-success {
+    background: var(--su);
+}
+
+.sw-btn-ghost {
+    background: transparent;
+    color: var(--bc);
+    border: var(--brd);
+}
+
+.sw-btn-ghost:hover {
+    background: var(--b2);
+    opacity: 1;
+    box-shadow: none;
+}
+
+.sw-btn-outline {
+    background: transparent;
+    color: var(--p);
+    border: 1.5px solid var(--p);
+}
+
+.sw-btn-outline:hover {
+    background: rgba(40, 68, 154, 0.06);
+    background: color-mix(in srgb, var(--p) 6%, transparent);
+    opacity: 1;
+}
+
+.sw-btn-light {
+    background: var(--b1);
+    color: var(--p);
+    border: 1.5px solid var(--p);
+}
+
+.sw-btn-light:hover {
+    background: #f0f2f9;
+    background: color-mix(in srgb, var(--p) 6%, var(--b1));
+    opacity: 1;
+}
+
+.sw-btn-xs {
+    gap: 5px;
+    padding: 0.3rem 0.75rem;
+    font-size: var(--sw-text-xs);
+    border-radius: var(--sw-radius-sm);
+}
+
+.sw-btn-sm {
+    padding: 0.45rem var(--sw-spacing-md);
+    font-size: var(--sw-text-base);
+    border-radius: var(--r);
+}
+
+.sw-btn-icon {
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: var(--r);
+}
+
+.sw-btn-lg {
+    padding: 0.75rem 1.6rem;
+    font-size: 17px;
+}
+
+.sw-btn-xl {
+    padding: 0.9rem var(--sw-spacing-xl);
+    font-size: var(--sw-text-xl);
+}
+
+.sw-bico {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 31px;
+    border: var(--brd-s);
+    border-radius: var(--r);
+    background: var(--b1);
+    cursor: pointer;
+    font-size: var(--sw-text-sm);
+    transition:
+        background 0.15s,
+        border-color 0.15s,
+        color 0.15s,
+        opacity 0.15s;
+    color: var(--bc);
+    text-decoration: none;
+}
+
+.sw-bico:hover {
+    background: #eef0f8;
+    background: color-mix(in srgb, var(--p) 7%, var(--b1));
+    border-color: rgba(40, 68, 154, 0.34);
+    border-color: color-mix(in srgb, var(--p) 34%, transparent);
+    color: var(--p);
+    opacity: 1;
+}
+
+.sw-bico:disabled {
+    background: var(--b1);
+    color: var(--bc2);
+    opacity: 0.38;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.sw-bico:disabled:hover {
+    background: var(--b1);
+    color: var(--bc2);
+}
+
+.sw-bico-edit {
+    background: var(--b1);
+    border-color: rgba(40, 68, 154, 0.3);
+    border-color: color-mix(in srgb, var(--p) 30%, transparent);
+    color: var(--bc);
+}
+
+.sw-bico-copy {
+    background: var(--p);
+    border-color: var(--p);
+    color: var(--btn-text);
+}
+
+.sw-bico-delete {
+    background: var(--er);
+    border-color: var(--er);
+    color: var(--erc);
+}
+
+.sw-bico-success {
+    background: #daf4ed;
+    background: color-mix(in srgb, var(--su) 14%, var(--b1));
+    border-color: rgba(0, 186, 123, 0.4);
+    border-color: color-mix(in srgb, var(--su) 40%, transparent);
+    color: #00734c;
+    color: color-mix(in srgb, var(--su) 62%, #000);
+}
+
+.sw-bico-info {
+    background: #dff2fd;
+    background: color-mix(in srgb, var(--in) 12%, var(--b1));
+    border-color: rgba(0, 164, 242, 0.38);
+    border-color: color-mix(in srgb, var(--in) 38%, transparent);
+    color: #006696;
+    color: color-mix(in srgb, var(--in) 62%, #000);
+}
+
+.sw-bico-warning {
+    background: #fdefdb;
+    background: color-mix(in srgb, var(--wa) 14%, var(--b1));
+    border-color: rgba(250, 151, 0, 0.42);
+    border-color: color-mix(in srgb, var(--wa) 42%, transparent);
+    color: #875200;
+    color: color-mix(in srgb, var(--wa) 54%, #000);
+}
+
+.sw-bico-transfer {
+    background: #fdefdb;
+    background: color-mix(in srgb, var(--wa) 14%, var(--b1));
+    border-color: rgba(250, 151, 0, 0.42);
+    border-color: color-mix(in srgb, var(--wa) 42%, transparent);
+    color: #875200;
+    color: color-mix(in srgb, var(--wa) 54%, #000);
+}
+
+[data-theme="dark"] .sw-bico,
+[data-theme="dark"] .sw-bico-edit {
+    background: var(--b1);
+    border-color: rgba(157, 189, 232, 0.32);
+    border-color: color-mix(in srgb, var(--s) 32%, transparent);
+    color: var(--bc);
+}
+
+[data-theme="dark"] .sw-bico:hover {
+    background: #363e51;
+    background: color-mix(in srgb, var(--s) 10%, var(--b1));
+    color: var(--p);
+}
+
+[data-theme="dark"] .sw-bico-delete {
+    background: var(--er);
+    border-color: var(--er);
+    color: var(--erc);
+}
+
+[data-theme="dark"] .sw-bico-success {
+    background: rgba(0, 211, 144, 0.16);
+    background: color-mix(in srgb, var(--su) 16%, transparent);
+    color: var(--su);
+}
+
+[data-theme="dark"] .sw-bico-info {
+    background: rgba(0, 186, 254, 0.16);
+    background: color-mix(in srgb, var(--in) 16%, transparent);
+    color: var(--in);
+}
+
+[data-theme="dark"] .sw-bico-warning,
+[data-theme="dark"] .sw-bico-transfer {
+    background: rgba(252, 183, 0, 0.16);
+    background: color-mix(in srgb, var(--wa) 16%, transparent);
+    color: var(--wa);
+}
+
+/* ===== src/components/card.css ===== */
+/* Card genérica
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-card {
+    min-width: 0;
+    background: var(--b1);
+    border: var(--brd);
+    border-radius: var(--rl);
+    padding: 1.2rem 1.4rem;
+    transition: box-shadow 0.18s;
+}
+
+.sw-card:hover {
+    box-shadow: var(--sh-md);
+}
+
+.sw-card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--p);
+    line-height: 1.25;
+    margin-bottom: 7px;
+}
+
+.sw-card-body {
+    font-size: var(--sw-text-md);
+    color: var(--bc2);
+    line-height: 1.55;
+}
+
+/* .sw-card-compact (variante chica) ya existe en tables.css junto a
+   .sw-list-card — mismo criterio de nombre que .sw-form-compact. Acá solo
+   falta el par grande. */
+.sw-card-lg {
+    padding: 1.6rem 1.8rem;
+}
+
+.sw-card-footer {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: var(--brd);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ===== src/components/dashboard.css ===== */
+/* Reporte agrupado + dashboard: métricas, accesos rápidos, gráficos, dona, actividad reciente
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+/* ── Reporte agrupado dentro de card (bloques por socio, por cuenta, etc.) ── */
+.sw-report-logo {
+    max-height: 48px;
+    max-width: 72px;
+    object-fit: contain;
+}
+
+.sw-logo-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+}
+
+.sw-logo-preview img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+}
+
+.sw-report-block + .sw-report-block {
+    margin-top: var(--sw-spacing-lg);
+}
+
+.sw-report-heading {
+    color: var(--p);
+    font-size: var(--sw-text-sm);
+    font-weight: 700;
+    letter-spacing: .04em;
+    margin-bottom: .75rem;
+    text-transform: uppercase;
+}
+
+/* --sw-grid-min / --sw-grid-cols pisables — ver la nota completa en
+   .sw-action-card-grid (action-card.css). */
+.sw-metrics-grid {
+    --sw-grid-min: 190px;
+    display: grid;
+    grid-template-columns: repeat(var(--sw-grid-cols, auto-fit), minmax(var(--sw-grid-min), 1fr));
+    gap: var(--sw-spacing-md);
+    margin-bottom: 28px;
+}
+
+.sw-metrics-grid-sm {
+    --sw-grid-min: 150px;
+}
+
+.sw-metrics-grid-lg {
+    --sw-grid-min: 230px;
+}
+
+.sw-content-stack {
+    display: grid;
+    gap: var(--sw-spacing-lg);
+}
+
+.sw-content-stack > .sw-metrics-grid {
+    margin-bottom: 0;
+}
+
+.sw-dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 0.92fr);
+    gap: var(--sw-spacing-lg);
+    align-items: start;
+    min-width: 0;
+}
+
+.sw-dashboard-main,
+.sw-dashboard-aside {
+    display: grid;
+    gap: var(--sw-spacing-lg);
+    min-width: 0;
+}
+
+.sw-dashboard-aside .sw-quicklink-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.sw-row-gap {
+    row-gap: var(--sw-spacing-lg);
+}
+
+.sw-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    background: var(--b1);
+    border-radius: var(--r);
+    padding: 1.1rem 1.2rem;
+    border: var(--brd);
+}
+
+/* --sw-metric-icon-size pisable — mismo criterio que --sw-action-card-icon-size
+   (ver la nota completa en action-card.css). */
+.sw-metric-icon {
+    --sw-metric-icon-size: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--sw-metric-icon-size);
+    height: var(--sw-metric-icon-size);
+    border-radius: var(--r);
+    font-size: var(--sw-text-lg);
+    flex-shrink: 0;
+}
+
+.sw-metric-icon-primary {
+    background: rgba(40, 68, 154, 0.14);
+    background: color-mix(in srgb, var(--p) 14%, transparent);
+    color: var(--p);
+}
+
+.sw-metric-icon-accent {
+    background: rgba(250, 117, 173, 0.16);
+    background: color-mix(in srgb, var(--a) 16%, transparent);
+    color: #bc5882;
+    color: color-mix(in srgb, var(--a) 75%, #000);
+}
+
+.sw-metric-icon-info {
+    background: rgba(0, 164, 242, 0.14);
+    background: color-mix(in srgb, var(--in) 14%, transparent);
+    color: #0073a9;
+    color: color-mix(in srgb, var(--in) 70%, #000);
+}
+
+.sw-metric-icon-secondary {
+    background: rgba(67, 97, 238, 0.16);
+    background: color-mix(in srgb, var(--s) 16%, transparent);
+    color: #2f44a7;
+    color: color-mix(in srgb, var(--s) 70%, #000);
+}
+
+[data-theme="dark"] .sw-metric-icon-accent {
+    color: var(--a);
+}
+
+[data-theme="dark"] .sw-metric-icon-info {
+    color: var(--in);
+}
+
+[data-theme="dark"] .sw-metric-icon-secondary {
+    color: var(--s);
+}
+
+.sw-metric-label {
+    font-size: var(--sw-text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--s);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sw-metric-value {
+    font-size: var(--sw-text-3xl);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+}
+
+.sw-metric-sub {
+    font-size: var(--sw-text-base);
+    color: var(--bc2);
+    margin-top: 3px;
+}
+
+.sw-metric-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: var(--sw-text-sm);
+    font-weight: 600;
+}
+
+.sw-metric-trend-up {
+    color: var(--su);
+}
+
+.sw-metric-trend-down {
+    color: var(--er);
+}
+
+.sw-metric-trend-note {
+    color: var(--bc2);
+    font-weight: 500;
+}
+
+/* ── Accesos rápidos (dashboard) ──
+   --sw-grid-min / --sw-grid-cols pisables — ver la nota completa en
+   .sw-action-card-grid (action-card.css). */
+.sw-quicklink-grid {
+    --sw-grid-min: 220px;
+    display: grid;
+    grid-template-columns: repeat(var(--sw-grid-cols, auto-fit), minmax(var(--sw-grid-min), 1fr));
+    gap: var(--sw-spacing-md);
+}
+
+.sw-quicklink-grid-sm {
+    --sw-grid-min: 180px;
+}
+
+.sw-quicklink-grid-lg {
+    --sw-grid-min: 260px;
+}
+
+.sw-quicklink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: var(--sw-spacing-md);
+    border: var(--brd);
+    border-radius: var(--r);
+    color: var(--bc);
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.sw-quicklink:hover {
+    background: var(--b2);
+    border-color: rgba(40, 68, 154, 0.45);
+    border-color: color-mix(in srgb, var(--p) 45%, transparent);
+    color: var(--bc);
+    text-decoration: none;
+}
+
+.sw-quicklink > span:first-child {
+    min-width: 0;
+}
+
+/* --sw-quicklink-icon-size pisable — mismo criterio que --sw-action-card-icon-size
+   (ver la nota completa en action-card.css). */
+.sw-quicklink-icon {
+    --sw-quicklink-icon-size: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--sw-quicklink-icon-size);
+    height: var(--sw-quicklink-icon-size);
+    margin-right: 0.85rem;
+    border-radius: var(--r);
+    background: rgba(40, 68, 154, 0.12);
+    background: color-mix(in srgb, var(--p) 12%, transparent);
+    color: var(--p);
+}
+
+.sw-quicklink-title {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--bc);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sw-quicklink-subtitle {
+    display: block;
+    max-width: 100%;
+    margin-top: 0.15rem;
+    overflow: hidden;
+    font-size: var(--sw-text-xs);
+    color: var(--bc2);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Tarjetas de gráfico (dashboard) ── */
+.sw-chart-card {
+    min-width: 0;
+    min-height: 360px;
+    overflow: hidden;
+}
+
+.sw-chart-wrap {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    height: 270px;
+}
+
+.sw-chart-card-lg .sw-chart-wrap {
+    height: 300px;
+}
+
+.sw-chart-card-sm {
+    min-height: 320px;
+}
+
+.sw-chart-card-sm .sw-chart-wrap {
+    height: 230px;
+}
+
+.sw-chart-wrap canvas {
+    display: block;
+    max-width: 100%;
+}
+
+.sw-chart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 270px;
+    text-align: center;
+    color: var(--bc2);
+}
+
+.sw-chart-empty i {
+    margin-bottom: 0.75rem;
+    font-size: 2rem;
+    color: var(--bc2);
+}
+
+.sw-chart-empty strong {
+    color: var(--bc);
+}
+
+/* ── Dona con leyenda lateral (dashboard) ── */
+.sw-donut-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.sw-donut-canvas {
+    position: relative;
+    flex-shrink: 0;
+    width: 130px;
+    height: 130px;
+}
+
+.sw-donut-canvas canvas {
+    display: block;
+}
+
+.sw-donut-total {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+}
+
+.sw-donut-total-value {
+    font-size: var(--sw-text-md);
+    font-weight: 700;
+    color: var(--bc);
+    line-height: 1.15;
+}
+
+.sw-donut-total-label {
+    font-size: var(--sw-text-3xs);
+    color: var(--bc2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sw-donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    flex: 1;
+}
+
+.sw-donut-legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sw-spacing-sm);
+    font-size: var(--sw-text-sm);
+    color: var(--bc);
+}
+
+.sw-donut-legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.sw-donut-legend-label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sw-donut-legend-value {
+    font-weight: 700;
+    color: var(--bc);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Actividad reciente (dashboard) ── */
+.sw-activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sw-spacing-xs);
+}
+
+.sw-activity-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.55rem 0;
+    border-bottom: var(--brd);
+}
+
+.sw-activity-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* --sw-activity-icon-size pisable — mismo criterio que --sw-action-card-icon-size
+   (ver la nota completa en action-card.css). */
+.sw-activity-icon {
+    --sw-activity-icon-size: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--sw-activity-icon-size);
+    height: var(--sw-activity-icon-size);
+    border-radius: 50%;
+    font-size: var(--sw-text-base);
+    flex-shrink: 0;
+}
+
+.sw-activity-icon-venta {
+    background: rgba(40, 68, 154, 0.14);
+    background: color-mix(in srgb, var(--p) 14%, transparent);
+    color: var(--p);
+}
+
+.sw-activity-icon-compra {
+    background: rgba(250, 117, 173, 0.16);
+    background: color-mix(in srgb, var(--a) 16%, transparent);
+    color: #bc5882;
+    color: color-mix(in srgb, var(--a) 75%, #000);
+}
+
+[data-theme="dark"] .sw-activity-icon-compra {
+    color: var(--a);
+}
+
+.sw-activity-body {
+    min-width: 0;
+    flex: 1;
+}
+
+.sw-activity-title {
+    display: block;
+    overflow: hidden;
+    font-size: var(--sw-text-base);
+    font-weight: 600;
+    color: var(--bc);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sw-activity-subtitle {
+    display: block;
+    overflow: hidden;
+    font-size: var(--sw-text-xs);
+    color: var(--bc2);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sw-activity-amount {
+    flex-shrink: 0;
+    font-size: var(--sw-text-base);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.sw-activity-amount-venta {
+    color: var(--su);
+}
+
+.sw-activity-amount-compra {
+    color: #bc5882;
+    color: color-mix(in srgb, var(--a) 75%, #000);
+}
+
+[data-theme="dark"] .sw-activity-amount-compra {
+    color: var(--a);
+}
+
+@media (max-width: 1199.98px) {
+    .sw-dashboard-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .sw-metrics-grid,
+    .sw-metrics-grid-sm,
+    .sw-metrics-grid-lg {
+        --sw-grid-min: 0;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--sw-spacing-sm);
+    }
+
+    .sw-metric {
+        padding: 0.85rem;
+    }
+
+    .sw-metric-value {
+        font-size: var(--sw-text-2xl);
+    }
+
+    .sw-metric-trend {
+        flex-wrap: wrap;
+    }
+
+    .sw-chart-card,
+    .sw-chart-card-sm {
+        min-height: 300px;
+    }
+
+    .sw-chart-wrap,
+    .sw-chart-card-lg .sw-chart-wrap,
+    .sw-chart-card-sm .sw-chart-wrap {
+        height: 220px;
+    }
+}
+
+/* ===== src/components/dropdown.css ===== */
+/* Dropdown genérico */
+
+.sw-dropdown {
+    position: relative;
+    display: inline-flex;
+}
+
+.sw-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: var(--sw-z-dropdown);
+    display: none;
+    min-width: 190px;
+    padding: 0.35rem;
+    border: var(--brd);
+    border-radius: var(--r);
+    background: var(--b1);
+    box-shadow: var(--sh-md);
+}
+
+.sw-dropdown-menu.sw-dropdown-menu-start {
+    right: auto;
+    left: 0;
+}
+
+.sw-dropdown-menu.open {
+    display: grid;
+    gap: 2px;
+}
+
+.sw-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    border: 0;
+    border-radius: var(--r);
+    background: transparent;
+    color: var(--bc);
+    font: inherit;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sw-dropdown-item:hover,
+.sw-dropdown-item:focus-visible {
+    background: var(--b2);
+    color: var(--p);
+    outline: none;
+}
+
+.sw-dropdown-divider {
+    height: 0;
+    margin: 0.3rem 0;
+    border-top: var(--brd);
+}
+
+/* ===== src/components/empty-state.css ===== */
+/* Estado vacío genérico
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-empty-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--bc2);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.sw-empty-state i {
+    color: var(--p);
+    font-size: 18px;
+}
+
+/* ===== src/components/footer.css ===== */
+/* Footer de la app
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+/* ── Footer — tercer hijo flex de .sw-app, siempre pegado abajo ── */
+.sw-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 24px;
+    padding: 3px 18px;
+    border-top: var(--brd);
+    background: var(--b1);
+    color: var(--bc2);
+    font-size: 11px;
+}
+
+.sw-footer a {
+    color: var(--p);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.sw-footer a:hover {
+    text-decoration: underline;
+}
+
+.sw-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+
+.sw-footer-brand {
+    align-items: center;
+    display: flex;
+    gap: 7px;
+    min-width: 0;
+}
+
+.sw-footer-logo {
+    height: 12px;
+    object-fit: contain;
+    width: auto;
+}
+
+.sw-footer-copy {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 0;
+}
+
+.sw-footer-copy span {
+    color: var(--bc2);
+}
+
+.sw-footer-contact {
+    align-items: center;
+    color: var(--p);
+    display: inline-flex;
+    gap: 4px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.sw-footer-contact:hover {
+    text-decoration: underline;
+}
+
+.sw-footer-contact i {
+    font-size: 11px;
+}
+
+.sw-footer-social {
+    align-items: center;
+    color: var(--p);
+    display: inline-flex;
+    font-size: 11px;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.sw-footer-social:hover {
+    text-decoration: underline;
+}
+
+/* ===== src/components/forms.css ===== */
+/* Campos de formulario: field, label, input, select nativo, textarea, hint, toggle, checkbox, radio, select buscable (.sw-ss-*)
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--sw-spacing-md);
+}
+
+.sw-label {
+    display: inline-block;
+    margin-bottom: var(--sw-spacing-sm);
+    font-size: var(--sw-text-base);
+    font-weight: 500;
+    color: var(--bc2);
+}
+
+.sw-input,
+.sw-select {
+    width: 100%;
+    height: 43px;
+    padding: 0.65rem var(--sw-spacing-md);
+    font-family: "Inter", sans-serif;
+    font-size: var(--sw-text-md);
+    line-height: 1.2;
+    color: var(--bc);
+    background-color: var(--b1);
+    border: 1.5px solid rgba(67, 97, 238, 0.42);
+    border-radius: var(--r);
+    outline: none;
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+    box-sizing: border-box;
+}
+
+.sw-input:focus,
+.sw-select:focus {
+    border-color: var(--p);
+    box-shadow: 0 0 0 3px rgba(40, 68, 154, 0.12);
+}
+
+.sw-input:disabled,
+.sw-select:disabled,
+.sw-textarea:disabled,
+.sw-input[readonly],
+.sw-select[readonly],
+.sw-textarea[readonly] {
+    background: var(--b2);
+    border-color: rgba(107, 114, 128, 0.28);
+    color: var(--bc2);
+    cursor: not-allowed;
+    opacity: 0.78;
+    box-shadow: none;
+}
+
+.sw-input.sw-error,
+.sw-select.sw-error,
+.sw-textarea.sw-error,
+.sw-file-input.sw-error {
+    border-color: var(--er);
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.1);
+}
+
+.sw-select {
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    background-size: 14px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.sw-select::-ms-expand {
+    display: none;
+}
+
+.sw-select option {
+    color: var(--bc2);
+}
+
+.sw-select.sw-select-empty {
+    color: var(--bc2);
+}
+
+.sw-input::placeholder,
+.sw-textarea::placeholder {
+    color: var(--bc2);
+    opacity: 1;
+}
+
+.sw-input[type="date"].sw-date-empty,
+.sw-input[type="time"].sw-date-empty,
+.sw-input[type="datetime-local"].sw-date-empty {
+    color: var(--bc2);
+}
+
+/* ── Inputs de fecha/hora ─────────────────────────────────────────
+   El calendario emergente lo pinta el navegador fuera del DOM: no es
+   estilizable. Solo se controla el icono que lo abre y los campos
+   dd/mm/aaaa. Como en .sw-select, el SVG lleva el color literal porque
+   url() no resuelve variables CSS; el override dark va mas abajo. */
+.sw-input[type="date"],
+.sw-input[type="time"],
+.sw-input[type="datetime-local"] {
+    cursor: pointer;
+}
+
+.sw-input[type="date"]::-webkit-calendar-picker-indicator,
+.sw-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2328449a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+}
+
+.sw-input[type="time"]::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2328449a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'%3E%3C/circle%3E%3Cpolyline points='12 7 12 12 15 14'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.sw-input[type="date"]::-webkit-calendar-picker-indicator,
+.sw-input[type="time"]::-webkit-calendar-picker-indicator,
+.sw-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    width: 18px;
+    height: 18px;
+    margin-left: var(--sw-spacing-sm);
+    padding: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+    opacity: 0.65;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.sw-input[type="date"]:hover::-webkit-calendar-picker-indicator,
+.sw-input[type="time"]:hover::-webkit-calendar-picker-indicator,
+.sw-input[type="datetime-local"]:hover::-webkit-calendar-picker-indicator,
+.sw-input[type="date"]:focus::-webkit-calendar-picker-indicator,
+.sw-input[type="time"]:focus::-webkit-calendar-picker-indicator,
+.sw-input[type="datetime-local"]:focus::-webkit-calendar-picker-indicator {
+    opacity: 1;
+}
+
+.sw-input::-webkit-datetime-edit {
+    font-variant-numeric: tabular-nums;
+}
+
+.sw-input::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+}
+
+.sw-input::-webkit-datetime-edit-text {
+    padding: 0 2px;
+    color: var(--bc2);
+}
+
+.sw-input::-webkit-datetime-edit-day-field:focus,
+.sw-input::-webkit-datetime-edit-month-field:focus,
+.sw-input::-webkit-datetime-edit-year-field:focus,
+.sw-input::-webkit-datetime-edit-hour-field:focus,
+.sw-input::-webkit-datetime-edit-minute-field:focus,
+.sw-input::-webkit-datetime-edit-second-field:focus,
+.sw-input::-webkit-datetime-edit-ampm-field:focus {
+    padding: 0 2px;
+    border-radius: var(--sw-radius-sm);
+    background: rgba(40, 68, 154, 0.16);
+    color: var(--bc);
+    outline: none;
+}
+
+.sw-file-input {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 43px;
+    padding: 0 var(--sw-spacing-sm);
+    background-color: var(--b1);
+    border: 1.5px solid rgba(67, 97, 238, 0.42);
+    border-radius: var(--r);
+    cursor: pointer;
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+
+.sw-file-input:focus-within {
+    border-color: var(--p);
+    box-shadow: 0 0 0 3px rgba(40, 68, 154, 0.12);
+}
+
+.sw-file-input-btn {
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    height: 30px;
+    margin-right: 0.75rem;
+    padding: 0 0.9rem;
+    font-family: "Inter", sans-serif;
+    font-size: var(--sw-text-sm);
+    font-weight: 600;
+    color: var(--bc);
+    background: var(--b2);
+    border-radius: var(--r);
+    transition: background 0.15s;
+}
+
+.sw-file-input:hover .sw-file-input-btn {
+    background: #d1d9ed;
+}
+
+.sw-file-input-name {
+    overflow: hidden;
+    color: var(--bc2);
+    font-family: "Inter", sans-serif;
+    font-size: var(--sw-text-md);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sw-file-input-name.has-file {
+    color: var(--bc);
+}
+
+.sw-file-input-native {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+[data-theme="dark"] .sw-input[type="date"]::-webkit-calendar-picker-indicator,
+[data-theme="dark"] .sw-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237da4e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] .sw-input[type="time"]::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237da4e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'%3E%3C/circle%3E%3Cpolyline points='12 7 12 12 15 14'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] .sw-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.sw-textarea {
+    width: 100%;
+    padding: 0.65rem var(--sw-spacing-md);
+    font-family: "Inter", sans-serif;
+    font-size: var(--sw-text-md);
+    color: var(--bc);
+    background-color: var(--b1);
+    border: 1.5px solid rgba(67, 97, 238, 0.42);
+    border-radius: var(--r);
+    outline: none;
+    resize: vertical;
+}
+
+.sw-textarea:focus {
+    border-color: var(--p);
+    box-shadow: 0 0 0 3px rgba(40, 68, 154, 0.12);
+}
+
+.sw-hint {
+    font-size: var(--sw-text-sm);
+    color: var(--bc2);
+}
+
+.sw-hint-error {
+    font-size: var(--sw-text-sm);
+    color: var(--er);
+}
+
+.sw-required {
+    color: var(--er);
+}
+
+.sw-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: var(--sw-spacing-sm);
+    margin-top: var(--sw-spacing-lg);
+}
+
+.sw-form-compact .sw-field {
+    margin-bottom: 0;
+}
+
+.sw-form-compact .sw-label {
+    margin-bottom: 0.32rem;
+    font-size: var(--sw-text-sm);
+}
+
+.sw-form-compact .sw-input,
+.sw-form-compact .sw-select {
+    height: 38px;
+    padding: var(--sw-spacing-sm) 0.78rem;
+    font-size: var(--sw-text-base);
+}
+
+.sw-form-compact .sw-select {
+    padding-right: 2.2rem;
+    background-position: right 0.72rem center;
+}
+
+.sw-form-compact .sw-textarea {
+    min-height: 68px;
+    padding: var(--sw-spacing-sm) 0.78rem;
+    font-size: var(--sw-text-base);
+}
+
+.sw-form-compact .select2-container--default .select2-selection--single {
+    min-height: 38px;
+}
+
+.sw-form-compact .select2-container--default .select2-selection--single .select2-selection__rendered {
+    font-size: var(--sw-text-base);
+}
+
+.sw-form-compact .select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 4px;
+}
+
+.sw-input-icon-wrap {
+    position: relative;
+}
+
+.sw-input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bc2);
+    font-size: var(--sw-text-base);
+    pointer-events: none;
+}
+
+.sw-input-has-icon {
+    padding-left: 2.5rem;
+}
+
+/* Campo de busqueda con selector pegado a la izquierda ("Nombre | buscar...").
+   Un solo borde y un solo foco para el conjunto. */
+.sw-search-field {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    border-radius: var(--r);
+}
+
+.sw-search-field:focus-within {
+    box-shadow: 0 0 0 3px rgba(40, 68, 154, 0.12);
+}
+
+.sw-search-field .sw-search-field-select {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 48%;
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: var(--b2);
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+/* Celular y tablet vertical: sin lupa dentro del campo, mas sitio para
+   escribir. Mismo corte que el menu lateral en overlay de la cabecera de
+   pagina (992px). */
+@media (max-width: 991.98px) {
+    .sw-search-field .sw-search-field-input .sw-input-icon {
+        display: none;
+    }
+
+    .sw-search-field .sw-search-field-input .sw-input-has-icon {
+        padding-left: var(--sw-spacing-md);
+    }
+}
+
+/* Celular: selector mas compacto para dejar sitio al texto. Si una opcion no
+   cabe se corta con puntos suspensivos. */
+@media (max-width: 575.98px) {
+    .sw-search-field .sw-search-field-select {
+        max-width: 42%;
+        padding-left: 0.65rem;
+        padding-right: 1.7rem;
+        font-size: var(--sw-text-sm);
+        background-position: right 0.5rem center;
+        background-size: 12px;
+    }
+}
+
+.sw-search-field .sw-search-field-input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.sw-search-field .sw-search-field-input .sw-input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.sw-search-field .sw-search-field-select:focus,
+.sw-search-field .sw-search-field-input .sw-input:focus {
+    position: relative;
+    z-index: 1;
+    box-shadow: none;
+}
+
+.sw-search-field:focus-within .sw-search-field-select,
+.sw-search-field:focus-within .sw-search-field-input .sw-input {
+    border-color: var(--p);
+}
+
+.sw-ss-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.sw-ss-trigger {
+    width: 100%;
+    padding: 0.65rem var(--sw-spacing-md);
+    font-family: "Inter", sans-serif;
+    font-size: var(--sw-text-md);
+    color: var(--bc);
+    background: var(--b1);
+    border: 1.5px solid rgba(67, 97, 238, 0.42);
+    border-radius: var(--r);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sw-spacing-sm);
+    transition: border-color 0.15s;
+}
+
+.sw-ss-trigger.open {
+    border-color: var(--p);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 0 0 3px rgba(40, 68, 154, 0.12);
+}
+
+.sw-ss-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--b1);
+    border: 1.5px solid var(--p);
+    border-top: none;
+    border-bottom-left-radius: var(--r);
+    border-bottom-right-radius: var(--r);
+    z-index: var(--sw-z-dropdown);
+    box-shadow: var(--sh-md);
+    display: none;
+}
+
+.sw-ss-dropdown.open {
+    display: block;
+}
+
+.sw-ss-search {
+    width: 100%;
+    padding: 0.55rem var(--sw-spacing-md) 0.55rem 2.2rem;
+    font-family: "Inter", sans-serif;
+    font-size: var(--sw-text-md);
+    color: var(--bc);
+    background: var(--b2);
+    border: var(--brd);
+    border-radius: 0.35rem;
+    outline: none;
+    display: block;
+    box-sizing: border-box;
+}
+
+.sw-ss-opt {
+    padding: 0.6rem 1.1rem;
+    font-size: var(--sw-text-md);
+    cursor: pointer;
+    color: var(--bc);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    transition: background 0.12s;
+}
+
+.sw-ss-opt:hover {
+    background: rgba(40, 68, 154, 0.06);
+}
+
+.sw-ss-opt.selected {
+    background: rgba(40, 68, 154, 0.1);
+    color: var(--p);
+    font-weight: 600;
+}
+
+.sw-ss-empty {
+    padding: 0.8rem 1.1rem;
+    font-size: var(--sw-text-md);
+    color: var(--bc2);
+    text-align: center;
+}
+
+.sw-toggle {
+    width: 46px;
+    height: 26px;
+    background: rgba(67, 97, 238, 0.32);
+    border-radius: var(--sw-radius-pill);
+    position: relative;
+    cursor: pointer;
+    border: none;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.sw-toggle.on {
+    background: var(--p);
+}
+
+.sw-toggle.on-accent {
+    background: var(--a);
+}
+
+.sw-toggle::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    transition: left 0.18s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+
+.sw-toggle.on::after,
+.sw-toggle.on-accent::after {
+    left: 23px;
+}
+
+.sw-checkbox-input {
+    appearance: none;
+    width: 19px;
+    height: 19px;
+    border: 2px solid rgba(67, 97, 238, 0.55);
+    border-radius: var(--sw-radius-sm);
+    background: var(--b1);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.sw-checkbox-input:checked {
+    background: var(--p);
+    border-color: var(--p);
+    box-shadow: inset 0 0 0 3px var(--b1);
+}
+
+.sw-radio {
+    width: 19px;
+    height: 19px;
+    border: 2px solid rgba(67, 97, 238, 0.55);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--b1);
+    flex-shrink: 0;
+}
+
+.sw-radio.on {
+    border-color: var(--p);
+}
+
+.sw-radio.on::after {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--p);
+}
+
+/* --- Regla anti doble-espaciado — de SoffiFac (Familia A). Evita el doble
+   espaciado del patrón `sw-col-* sw-mb-3 > sw-field`: la columna ya aporta
+   el margen, el .sw-field no debe sumar el suyo encima (si no, los
+   formularios/modales quedan con huecos verticales dobles). */
+.sw-mb-3 > .sw-field,
+.sw-mb-4 > .sw-field {
+    margin-bottom: 0;
+}
+
+@supports (background: color-mix(in srgb, red 1%, blue)) {
+    .sw-input,
+    .sw-select,
+    .sw-file-input,
+    .sw-textarea,
+    .sw-ss-trigger {
+        border-color: color-mix(in srgb, var(--s) 42%, transparent);
+    }
+
+    .sw-input:focus,
+    .sw-select:focus,
+    .sw-file-input:focus-within,
+    .sw-textarea:focus,
+    .sw-ss-trigger.open {
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--p) 12%, transparent);
+    }
+
+    .sw-input:disabled,
+    .sw-select:disabled,
+    .sw-textarea:disabled,
+    .sw-input[readonly],
+    .sw-select[readonly],
+    .sw-textarea[readonly] {
+        border-color: color-mix(in srgb, var(--bc2) 28%, transparent);
+    }
+
+    .sw-input.sw-error,
+    .sw-select.sw-error,
+    .sw-textarea.sw-error,
+    .sw-file-input.sw-error {
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--er) 10%, transparent);
+    }
+
+    .sw-input::-webkit-datetime-edit-day-field:focus,
+    .sw-input::-webkit-datetime-edit-month-field:focus,
+    .sw-input::-webkit-datetime-edit-year-field:focus,
+    .sw-input::-webkit-datetime-edit-hour-field:focus,
+    .sw-input::-webkit-datetime-edit-minute-field:focus,
+    .sw-input::-webkit-datetime-edit-second-field:focus,
+    .sw-input::-webkit-datetime-edit-ampm-field:focus {
+        background: color-mix(in srgb, var(--p) 16%, transparent);
+    }
+
+    .sw-file-input:hover .sw-file-input-btn {
+        background: color-mix(in srgb, var(--p) 14%, var(--b2));
+    }
+
+    .sw-ss-opt:hover {
+        background: color-mix(in srgb, var(--p) 6%, transparent);
+    }
+
+    .sw-ss-opt.selected {
+        background: color-mix(in srgb, var(--p) 10%, transparent);
+    }
+
+    .sw-toggle {
+        background: color-mix(in srgb, var(--s) 32%, transparent);
+    }
+
+    .sw-checkbox-input,
+    .sw-radio {
+        border-color: color-mix(in srgb, var(--s) 55%, transparent);
+    }
+}
+
+/* ===== src/components/grid.css ===== */
+/* Grid propio (.sw-row / .sw-col-*) y sus @media
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.5rem;
+}
+
+.sw-row-compact {
+    row-gap: 0.75rem;
+}
+
+.sw-row > [class^="sw-col-"],
+.sw-row > [class*=" sw-col-"] {
+    flex: 0 0 var(--sw-col-xs-width, 100%);
+    max-width: var(--sw-col-xs-width, 100%);
+    padding: 0 0.5rem;
+    min-width: 0;
+}
+
+.sw-col-1 { --sw-col-width: 8.3333%; }
+
+.sw-col-2 { --sw-col-width: 16.6667%; }
+
+.sw-col-3 { --sw-col-width: 25%; }
+
+.sw-col-4 { --sw-col-width: 33.3333%; }
+
+.sw-col-5 { --sw-col-width: 41.6667%; }
+
+.sw-col-6 { --sw-col-width: 50%; }
+
+.sw-col-7 { --sw-col-width: 58.3333%; }
+
+.sw-col-8 { --sw-col-width: 66.6667%; }
+
+.sw-col-9 { --sw-col-width: 75%; }
+
+.sw-col-10 { --sw-col-width: 83.3333%; }
+
+.sw-col-11 { --sw-col-width: 91.6667%; }
+
+.sw-col-12 { --sw-col-width: 100%; }
+
+/* Columnas para pantallas chicas (desde 0px). Sin ellas, .sw-col-N vale 100%
+   hasta 768px. Combinar con la clase de escritorio: sw-col-xs-6 sw-col-4 da
+   2 por fila en celular y 3 desde 768px. */
+.sw-col-xs-1 { --sw-col-xs-width: 8.3333%; }
+
+.sw-col-xs-2 { --sw-col-xs-width: 16.6667%; }
+
+.sw-col-xs-3 { --sw-col-xs-width: 25%; }
+
+.sw-col-xs-4 { --sw-col-xs-width: 33.3333%; }
+
+.sw-col-xs-5 { --sw-col-xs-width: 41.6667%; }
+
+.sw-col-xs-6 { --sw-col-xs-width: 50%; }
+
+.sw-col-xs-7 { --sw-col-xs-width: 58.3333%; }
+
+.sw-col-xs-8 { --sw-col-xs-width: 66.6667%; }
+
+.sw-col-xs-9 { --sw-col-xs-width: 75%; }
+
+.sw-col-xs-10 { --sw-col-xs-width: 83.3333%; }
+
+.sw-col-xs-11 { --sw-col-xs-width: 91.6667%; }
+
+.sw-col-xs-12 { --sw-col-xs-width: 100%; }
+
+.sw-col-md-1 { --sw-col-md-width: 8.3333%; }
+
+.sw-col-md-2 { --sw-col-md-width: 16.6667%; }
+
+.sw-col-md-3 { --sw-col-md-width: 25%; }
+
+.sw-col-md-4 { --sw-col-md-width: 33.3333%; }
+
+.sw-col-md-5 { --sw-col-md-width: 41.6667%; }
+
+.sw-col-md-6 { --sw-col-md-width: 50%; }
+
+.sw-col-md-7 { --sw-col-md-width: 58.3333%; }
+
+.sw-col-md-8 { --sw-col-md-width: 66.6667%; }
+
+.sw-col-md-9 { --sw-col-md-width: 75%; }
+
+.sw-col-md-10 { --sw-col-md-width: 83.3333%; }
+
+.sw-col-md-11 { --sw-col-md-width: 91.6667%; }
+
+.sw-col-md-12 { --sw-col-md-width: 100%; }
+
+.sw-col-lg-1 { --sw-col-lg-width: 8.3333%; }
+
+.sw-col-lg-2 { --sw-col-lg-width: 16.6667%; }
+
+.sw-col-lg-3 { --sw-col-lg-width: 25%; }
+
+.sw-col-lg-4 { --sw-col-lg-width: 33.3333%; }
+
+.sw-col-lg-5 { --sw-col-lg-width: 41.6667%; }
+
+.sw-col-lg-6 { --sw-col-lg-width: 50%; }
+
+.sw-col-lg-7 { --sw-col-lg-width: 58.3333%; }
+
+.sw-col-lg-8 { --sw-col-lg-width: 66.6667%; }
+
+.sw-col-lg-9 { --sw-col-lg-width: 75%; }
+
+.sw-col-lg-10 { --sw-col-lg-width: 83.3333%; }
+
+.sw-col-lg-11 { --sw-col-lg-width: 91.6667%; }
+
+.sw-col-lg-12 { --sw-col-lg-width: 100%; }
+
+.sw-col-xl-1 { --sw-col-xl-width: 8.3333%; }
+
+.sw-col-xl-2 { --sw-col-xl-width: 16.6667%; }
+
+.sw-col-xl-3 { --sw-col-xl-width: 25%; }
+
+.sw-col-xl-4 { --sw-col-xl-width: 33.3333%; }
+
+.sw-col-xl-5 { --sw-col-xl-width: 41.6667%; }
+
+.sw-col-xl-6 { --sw-col-xl-width: 50%; }
+
+.sw-col-xl-7 { --sw-col-xl-width: 58.3333%; }
+
+.sw-col-xl-8 { --sw-col-xl-width: 66.6667%; }
+
+.sw-col-xl-9 { --sw-col-xl-width: 75%; }
+
+.sw-col-xl-10 { --sw-col-xl-width: 83.3333%; }
+
+.sw-col-xl-11 { --sw-col-xl-width: 91.6667%; }
+
+.sw-col-xl-12 { --sw-col-xl-width: 100%; }
+
+@media (min-width: 768px) {
+    .sw-row > [class^="sw-col-"],
+    .sw-row > [class*=" sw-col-"] {
+        flex-basis: var(--sw-col-md-width, var(--sw-col-width, 100%));
+        max-width: var(--sw-col-md-width, var(--sw-col-width, 100%));
+    }
+}
+
+@media (min-width: 992px) {
+    .sw-row > [class^="sw-col-"],
+    .sw-row > [class*=" sw-col-"] {
+        flex-basis: var(--sw-col-lg-width, var(--sw-col-md-width, var(--sw-col-width, 100%)));
+        max-width: var(--sw-col-lg-width, var(--sw-col-md-width, var(--sw-col-width, 100%)));
+    }
+}
+
+@media (min-width: 1200px) {
+    .sw-row > [class^="sw-col-"],
+    .sw-row > [class*=" sw-col-"] {
+        flex-basis: var(--sw-col-xl-width, var(--sw-col-lg-width, var(--sw-col-md-width, var(--sw-col-width, 100%))));
+        max-width: var(--sw-col-xl-width, var(--sw-col-lg-width, var(--sw-col-md-width, var(--sw-col-width, 100%))));
+    }
+}
+
+/* ===== src/components/impersonation-banner.css ===== */
+/* Banner de impersonación — de SoffiFac (Familia A). Cualquier app con
+   soporte que entra "como" un usuario lo necesita.
+
+   Distinto de .sw-alert a propósito: .sw-alert es solo para mensajes de una
+   sola vez (auto-dismiss vía swInitAlerts) — este banner debe quedarse
+   visible mientras dure la sesión impersonada, así que no lleva la clase
+   .sw-alert ni entra en swInitAlerts().
+
+   Fix de compatibilidad aplicado al portar: la fuente en SoffiFac usaba
+   color-mix() sin fallback estático. Aquí va con el mixin, como el resto
+   del paquete. */
+
+.sw-impersonation-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+    padding: 0.65rem 1.25rem;
+    font-size: var(--sw-text-base);
+    font-weight: var(--sw-font-medium);
+
+    background: rgba(250, 151, 0, 0.16);
+    background: color-mix(in srgb, var(--wa) 16%, transparent);
+    border-bottom: 1px solid rgba(250, 151, 0, 0.3);
+    border-bottom: 1px solid color-mix(in srgb, var(--wa) 30%, transparent);
+    color: #7d4c00;
+    color: color-mix(in srgb, var(--wa) 50%, #000);
+}
+
+.sw-impersonation-banner-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sw-impersonation-banner-exit {
+    /* .sw-btn fija color: var(--btn-text) pero no un background propio (eso
+       lo da siempre la variante, sw-btn-primary/error/etc.) — sin esto el
+       botón quedaba con texto sin fondo visible sobre el banner. */
+    background: var(--wa);
+    flex-shrink: 0;
+}
+
+[data-theme="dark"] .sw-impersonation-banner {
+    color: var(--wa);
+}
+
+/* ===== src/components/layout.css ===== */
+/* Shell de la app (.sw-app/.sw-body/.sw-main) + cabecera de página
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sw-body {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.sw-main {
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 24px 28px;
+    background: var(--b2);
+}
+
+.sw-page-header {
+    margin-bottom: 24px;
+}
+
+.sw-page-title {
+    color: var(--bc);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 6px;
+}
+
+.sw-page-subtitle {
+    color: var(--bc2);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* ===== src/components/misc.css ===== */
+/* Bloques de sección, data-grid, dinero, panel de totales, aside pegajoso
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+/* Structured detail blocks */
+.sw-section-block + .sw-section-block {
+    margin-top: 1.25rem;
+}
+
+.sw-section-title {
+    color: var(--p);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.25;
+    margin: 0 0 0.85rem;
+    text-transform: uppercase;
+}
+
+.sw-section-block-separated {
+    padding: 0;
+}
+
+.sw-section-block-separated + .sw-section-block-separated {
+    border-top: 1px solid rgba(67, 97, 238, 0.24);
+    border-top: 1px solid color-mix(in srgb, var(--s) 24%, transparent);
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+}
+
+.sw-section-block-separated > .sw-section-title {
+    font-size: 15px;
+    margin-bottom: .95rem;
+    text-transform: none;
+}
+
+.sw-data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 22px;
+}
+
+.sw-data-item {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.46fr) minmax(0, 1fr);
+    gap: 10px;
+    min-width: 0;
+    padding: 0.38rem 0;
+    border-bottom: 1px solid rgba(67, 97, 238, 0.18);
+    border-bottom: 1px solid color-mix(in srgb, var(--s) 18%, transparent);
+}
+
+.sw-data-label {
+    color: var(--bc2);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.sw-data-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: var(--bc);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.sw-money {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.sw-total-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 220px;
+    height: 100%;
+    padding: 1rem;
+    border: var(--brd-s);
+    border-radius: var(--r);
+    background: #f4f6fb;
+    background: color-mix(in srgb, var(--p) 4%, var(--b1));
+}
+
+.sw-total-label {
+    color: var(--p);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.25;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+}
+
+.sw-total-value {
+    color: var(--bc);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.sw-total-copy {
+    color: var(--bc2);
+    font-size: 13px;
+    margin: 0.85rem 0 0;
+}
+
+.sw-sticky-aside {
+    position: sticky;
+    top: 92px;
+}
+
+@media (max-width: 991.98px) {
+    .sw-list-count {
+        align-self: flex-start;
+    }
+
+    .sw-sticky-aside {
+        position: static;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .sw-crud-container {
+        padding-top: 22px;
+    }
+
+    .sw-crud-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .sw-crud-actions .sw-btn {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .sw-card.sw-list-card {
+        padding: 14px;
+    }
+
+    .sw-data-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .sw-data-item {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2px;
+    }
+}
+
+/* ===== src/components/modal.css ===== */
+/* Modal propio (backdrop + .is-open)
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: var(--sw-z-modal-backdrop);
+    background: rgba(0, 0, 0, 0.55);
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.sw-modal-backdrop.is-open {
+    display: flex;
+}
+
+body.sw-modal-open {
+    overflow: hidden;
+}
+
+.sw-modal {
+    background: var(--b1);
+    border-radius: var(--rl);
+    box-shadow: var(--sh-md);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 460px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    border: var(--brd);
+}
+
+.sw-modal-sm {
+    max-width: 360px;
+}
+
+.sw-modal-lg {
+    max-width: 760px;
+}
+
+.sw-modal-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--p);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.sw-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--bc);
+    cursor: pointer;
+    font-size: 23px;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.sw-modal-close:hover {
+    color: var(--p);
+}
+
+.sw-modal-body {
+    font-size: 15px;
+    color: var(--bc2);
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+
+.sw-modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* ===== src/components/navigation.css ===== */
+/* Topbar, menú de usuario y sidebar (incluye su @media compartido)
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-topbar {
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    background: var(--b1);
+    border-bottom: var(--brd);
+    position: sticky;
+    top: 0;
+    z-index: var(--sw-z-sticky);
+    transition: background 0.25s;
+    box-shadow: var(--sh-sm);
+}
+
+.sw-topbar-brand,
+.sw-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.sw-topbar-actions {
+    gap: 12px;
+    /* Las acciones no se encogen: lo que cede es la marca (nombre con
+       puntos suspensivos). Si se encogieran, el menu de usuario se salia del
+       ancho y la pagina hacia scroll horizontal. */
+    flex-shrink: 0;
+}
+
+.sw-topbar-logo {
+    height: 34px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.sw-topbar-logo-fallback {
+    align-items: center;
+    background: #e3e7f3;
+    background: color-mix(in srgb, var(--p) 12%, var(--b1));
+    border-radius: var(--r);
+    color: var(--p);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 17px;
+    height: 34px;
+    justify-content: center;
+    width: 34px;
+}
+
+.sw-topbar-tenant {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.sw-topbar-title-row {
+    align-items: center;
+    display: flex;
+    gap: 18px;
+    min-width: 0;
+}
+
+.sw-topbar-company {
+    display: block;
+    max-width: min(42vw, 480px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--bc);
+    font-size: var(--sw-text-base);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.sw-topbar-period {
+    max-width: min(42vw, 480px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--bc2);
+    font-size: var(--sw-text-sm);
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.sw-topbar-meta {
+    align-items: center;
+    display: flex;
+    gap: var(--sw-spacing-sm);
+    min-width: 0;
+}
+
+.sw-topbar-context-item {
+    align-items: center;
+    color: var(--bc2);
+    display: inline-flex;
+    gap: var(--sw-spacing-xs);
+    min-width: 0;
+}
+
+.sw-topbar-context-item span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sw-topbar-environment {
+    flex-shrink: 0;
+}
+
+.sw-topbar-environment-pill {
+    align-items: center;
+    background: #fcdeb2;
+    background: color-mix(in srgb, var(--wa) 30%, var(--b1));
+    border: 1px solid rgba(250, 151, 0, 0.5);
+    border: 1px solid color-mix(in srgb, var(--wa) 50%, transparent);
+    border-radius: var(--sw-radius-pill);
+    color: #513b16;
+    color: color-mix(in srgb, var(--bc) 74%, var(--wa));
+    display: inline-flex;
+    font-size: var(--sw-text-xs);
+    font-weight: 700;
+    gap: 5px;
+    line-height: 1;
+    padding: var(--sw-spacing-xs) 10px;
+    white-space: nowrap;
+}
+
+.sw-topbar-environment-pill i {
+    color: currentColor;
+    font-size: var(--sw-text-2xs);
+}
+
+.sw-topbar-period i,
+.sw-topbar-context-item i {
+    color: var(--p);
+    font-size: var(--sw-text-xs);
+}
+
+.sw-user-menu {
+    position: relative;
+}
+
+.sw-user-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--sw-spacing-sm);
+    height: 38px;
+    max-width: 290px;
+    padding: 3px var(--sw-spacing-sm) 3px var(--sw-spacing-xs);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--r);
+    color: var(--bc);
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        border-color 0.15s;
+}
+
+.sw-user-trigger:hover,
+.sw-user-trigger[aria-expanded="true"] {
+    background: var(--b1);
+    border-color: rgba(67, 97, 238, 0.34);
+    border-color: color-mix(in srgb, var(--s) 34%, transparent);
+}
+
+.sw-user-trigger:focus-visible,
+.sw-user-action:focus-visible {
+    outline: 2px solid var(--p);
+    outline-offset: 1px;
+}
+
+/* --sw-user-avatar-size pisable — mismo criterio que --sw-action-card-icon-size
+   (ver la nota completa en action-card.css). .sw-avatar-lg sigue pisando
+   width/height directo, no depende de esta var. */
+.sw-user-avatar {
+    --sw-user-avatar-size: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--sw-user-avatar-size);
+    height: var(--sw-user-avatar-size);
+    border-radius: 50%;
+    background: #e3e7f3;
+    background: color-mix(in srgb, var(--p) 12%, var(--b1));
+    color: var(--p);
+    font-size: var(--sw-text-md);
+}
+
+.sw-user-avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.sw-avatar-lg {
+    width: 84px;
+    height: 84px;
+    font-size: 34px;
+}
+
+.sw-user-avatar-fallback {
+    display: none;
+}
+
+.sw-user-avatar-photo.is-fallback .sw-user-avatar-img {
+    display: none;
+}
+
+.sw-user-avatar-photo.is-fallback .sw-user-avatar-fallback {
+    display: inline-block;
+}
+
+.sw-user-name {
+    max-width: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--sw-text-base);
+    font-weight: 500;
+}
+
+.sw-user-arrow {
+    color: var(--bc2);
+    font-size: var(--sw-text-xs);
+    transition: transform 0.15s;
+}
+
+.sw-user-trigger[aria-expanded="true"] .sw-user-arrow {
+    transform: rotate(180deg);
+}
+
+.sw-user-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: var(--sw-z-dropdown);
+    min-width: 220px;
+    padding: var(--sw-spacing-sm);
+    background: var(--b1);
+    border: var(--brd);
+    border-radius: var(--r);
+    box-shadow: var(--sh-md);
+}
+
+.sw-user-dropdown.open {
+    display: block;
+}
+
+.sw-user-role {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 6px;
+    padding: 6px var(--sw-spacing-sm) 10px;
+    border-bottom: var(--brd);
+}
+
+.sw-user-role-label {
+    color: var(--bc2);
+    font-size: var(--sw-text-2xs);
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.sw-user-role-value {
+    color: var(--bc);
+    font-size: var(--sw-text-base);
+    font-weight: 600;
+}
+
+.sw-user-dropdown form {
+    margin: 0;
+}
+
+.sw-user-action {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    padding: 10px var(--sw-spacing-sm);
+    background: transparent;
+    border: 0;
+    border-radius: var(--r);
+    color: var(--er);
+    font-family: inherit;
+    font-size: var(--sw-text-base);
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sw-user-action:hover {
+    background: rgba(225, 29, 72, 0.08);
+    background: color-mix(in srgb, var(--er) 8%, transparent);
+}
+
+.sw-user-action-neutral {
+    color: var(--bc);
+}
+
+.sw-user-action-neutral:hover {
+    background: var(--b2);
+}
+
+.sw-sidebar-backdrop {
+    display: none;
+}
+
+.sw-sidebar {
+    width: 245px;
+    background: var(--sb);
+    display: flex;
+    flex-direction: column;
+    padding: var(--sw-spacing-md) 12px;
+    flex-shrink: 0;
+    overflow-y: auto;
+    transition: background 0.25s;
+}
+
+.sw-sb-brand {
+    padding: var(--sw-spacing-xs) 0.75rem 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    margin-bottom: var(--sw-spacing-sm);
+}
+
+/* Flecha para cerrar el sidebar, arriba a la derecha de la marca. En
+   escritorio lo contrae (body.sw-sidebar-collapsed); por debajo de 1200px
+   cierra el overlay. */
+.sw-sb-brand {
+    position: relative;
+}
+
+.sw-sb-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--r);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--sw-text-md);
+    cursor: pointer;
+}
+
+.sw-sb-close:hover,
+.sw-sb-close:focus-visible {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    outline: none;
+}
+
+.sw-sb-brand-name {
+    padding-right: 40px;
+}
+
+/* Escritorio: el sidebar se puede contraer para ver el contenido a todo el
+   ancho. Por debajo de 1200px manda el overlay (body.sw-sidebar-open). */
+@media (min-width: 1200px) {
+    body.sw-sidebar-collapsed .sw-sidebar {
+        display: none;
+    }
+}
+
+.sw-sb-brand-name {
+    font-size: var(--sw-text-lg);
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.sw-sb-brand-sub {
+    font-size: var(--sw-text-xs);
+    color: rgba(255, 255, 255, 0.42);
+    margin-top: 2px;
+}
+
+.sw-sb-group {
+    font-size: var(--sw-text-2xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.35);
+    padding: 0 0.75rem;
+    margin: 18px 0 6px;
+    display: flex;
+    align-items: center;
+    gap: var(--sw-spacing-sm);
+}
+
+.sw-sb-group::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.sw-sb-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--r);
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--sw-text-base);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        color 0.15s,
+        border-radius 0.15s;
+}
+
+.sw-sb-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.sw-sb-link:focus-visible,
+.sw-sb-sub-link:focus-visible {
+    outline: 2px solid var(--s);
+    outline-offset: -2px;
+    color: #fff;
+}
+
+.sw-sb-link.active {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    border-left: 3px solid var(--s);
+    padding-left: calc(0.85rem - 3px);
+}
+
+.sw-sb-link i {
+    width: 18px;
+    text-align: center;
+    font-size: var(--sw-text-base);
+}
+
+.sw-sb-link .sw-arrow {
+    margin-left: auto;
+    font-size: var(--sw-text-xs);
+    transition: transform 0.2s;
+}
+
+.sw-sb-link.open .sw-arrow {
+    transform: rotate(90deg);
+}
+
+.sw-sidebar > .sw-sb-link {
+    margin-bottom: 0.15rem;
+}
+
+.sw-sb-toggle,
+.sw-sb-action {
+    width: 100%;
+    border: 0;
+    font-family: inherit;
+    line-height: inherit;
+    text-align: left;
+    background: transparent;
+}
+
+.sw-sidebar > .sw-sb-link.open {
+    margin-bottom: 0;
+    padding-left: calc(0.85rem - 3px);
+    border-left: 3px solid var(--s);
+    border-radius: var(--r) var(--r) 0 0;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.sw-sb-sub {
+    flex-shrink: 0;
+    overflow: hidden;
+    max-height: 0;
+    margin: 0;
+    padding: 0 var(--sw-spacing-sm) 0 0.7rem;
+    border-left: 3px solid transparent;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background: transparent;
+    transition: max-height 0.25s ease;
+}
+
+.sw-sb-sub.open {
+    max-height: 720px;
+    margin: 0 0 0.55rem;
+    padding: var(--sw-spacing-sm) var(--sw-spacing-sm) var(--sw-spacing-sm) 0.7rem;
+    border-left-color: var(--s);
+    background: rgba(0, 0, 0, 0.14);
+}
+
+.sw-sb-sub-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.62rem 0.7rem;
+    border-radius: 0.45rem;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: var(--sw-text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background 0.15s,
+        color 0.15s;
+}
+
+.sw-sb-sub-link i {
+    width: 15px;
+    text-align: center;
+    font-size: var(--sw-text-sm);
+    opacity: 0.75;
+}
+
+.sw-sb-sub-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.sw-sb-sub-link.active {
+    color: #fff;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.sw-sb-form {
+    margin: 0;
+}
+
+.sw-sb-action:hover {
+    background: rgba(225, 29, 72, 0.18);
+    background: color-mix(in srgb, var(--er) 18%, transparent);
+}
+
+/* Sidebar como overlay por debajo de 1200px. Separado del bloque de 768px:
+   la cabecera todavia cabe completa en tablet, solo el sidebar necesita
+   salir del flujo. Mantener en sync con SW_SIDEBAR_QUERY en soffi-ui.js. */
+@media (max-width: 1199.98px) {
+    body.sw-sidebar-open {
+        overflow: hidden;
+    }
+
+    .sw-sidebar {
+        position: fixed;
+        top: 58px;
+        bottom: 0;
+        left: 0;
+        z-index: var(--sw-z-sidebar);
+        visibility: hidden;
+        transform: translateX(-100%);
+        transition:
+            background 0.25s,
+            transform 0.2s ease,
+            visibility 0.2s ease;
+    }
+
+    body.sw-sidebar-open .sw-sidebar {
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    .sw-sidebar-backdrop {
+        position: fixed;
+        inset: 58px 0 0;
+        z-index: var(--sw-z-sidebar-backdrop);
+        display: block;
+        border: 0;
+        background: rgba(0, 0, 0, 0.38);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+    }
+
+    body.sw-sidebar-open .sw-sidebar-backdrop {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .sw-topbar {
+        padding: 0 12px;
+        gap: 10px;
+    }
+
+    .sw-topbar-brand {
+        gap: 10px;
+        overflow: hidden;
+    }
+
+    .sw-topbar-company {
+        font-size: var(--sw-text-base);
+        max-width: 120px;
+    }
+
+    .sw-topbar-period {
+        font-size: var(--sw-text-xs);
+        max-width: 120px;
+    }
+
+    .sw-topbar-title-row {
+        gap: var(--sw-spacing-sm);
+    }
+
+    .sw-topbar-meta {
+        gap: 6px;
+    }
+
+    .sw-topbar-environment {
+        display: none;
+    }
+
+    .sw-topbar-actions > .sw-btn,
+    .sw-user-name,
+    .sw-user-arrow {
+        display: none;
+    }
+
+    .sw-user-trigger {
+        padding-right: 6px;
+    }
+
+    .sw-main {
+        padding: var(--sw-spacing-md) 14px;
+    }
+}
+
+/* ===== src/components/pagination.css ===== */
+/* Paginación completa (nav, botones, elipsis)
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.sw-pg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--r);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: var(--brd);
+    background: var(--b1);
+    color: var(--bc);
+    text-decoration: none;
+}
+
+.sw-pg-btn.active {
+    background: var(--p);
+    color: var(--btn-text);
+    border-color: var(--p);
+}
+
+.sw-pg-btn:hover:not(.active) {
+    background: var(--b2);
+}
+
+.sw-pg-btn[aria-disabled="true"] {
+    color: var(--bc2);
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.sw-pg-btn:focus-visible {
+    outline: 2px solid var(--p);
+    outline-offset: 2px;
+}
+
+.sw-pg-ellipsis {
+    align-items: center;
+    color: var(--bc2);
+    display: inline-flex;
+    height: 38px;
+    padding: 0 2px;
+}
+
+@media (max-width: 575.98px) {
+    .sw-list-pagination nav.sw-pagination-nav {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .sw-pagination {
+        gap: 4px;
+        justify-content: flex-end;
+    }
+
+    .sw-pg-btn {
+        height: 34px;
+        width: 34px;
+    }
+
+    .sw-pg-ellipsis {
+        height: 34px;
+    }
+}
+
+/* ===== src/components/panel-tabs.css ===== */
+/* Panel con tabs integradas
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+/* ── Panel con tabs integradas (dos o mas secciones del mismo contexto) ── */
+.sw-panel-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    background: transparent;
+    border-radius: 1rem 1rem 0 0;
+    gap: .35rem;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+}
+
+.sw-panel-tabs .nav-item {
+    flex: 0 0 auto;
+}
+
+.sw-panel-tabs .nav-link {
+    align-items: center;
+    background: var(--b2);
+    border: 1px solid rgba(67, 97, 238, 0.35);
+    border: 1px solid color-mix(in srgb, var(--s) 35%, transparent);
+    border-bottom: 0;
+    border-radius: .75rem .75rem 0 0;
+    color: var(--bc2);
+    display: flex;
+    font-size: 13px;
+    font-weight: 600;
+    gap: .45rem;
+    justify-content: center;
+    line-height: 1.15;
+    margin-bottom: 0;
+    min-height: 44px;
+    padding: .7rem 1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+}
+
+.sw-panel-tabs .nav-link i {
+    flex: 0 0 auto;
+    line-height: 1;
+    text-align: center;
+    width: 1rem;
+}
+
+.sw-panel-tabs .nav-link span {
+    display: inline-flex;
+    min-width: 0;
+}
+
+.tab-content > .tab-pane {
+    display: none;
+}
+
+.tab-content > .active {
+    display: block;
+}
+
+.sw-panel-tabs .nav-link.active {
+    background: var(--p);
+    border-color: var(--p);
+    color: var(--btn-text);
+}
+
+.sw-panel-tabs .nav-link:hover:not(.active) {
+    color: var(--p);
+}
+
+.sw-panel-tabs .nav-link.active:hover {
+    color: var(--btn-text);
+}
+
+.sw-panel-tab-pane:focus {
+    outline: none;
+}
+
+.sw-card.sw-panel-card {
+    border-top-left-radius: 0;
+}
+
+@media (max-width: 767.98px) {
+    .sw-panel-tabs {
+        gap: .5rem;
+    }
+
+    .sw-panel-tabs .nav-link {
+        min-height: auto;
+        padding: .65rem .85rem;
+    }
+
+    .sw-card.sw-panel-card {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .sw-form-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .sw-form-actions .sw-btn {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+/* ===== src/components/print.css ===== */
+/* Utilidades y reset mínimo para impresión */
+
+.sw-print-only {
+    display: none !important;
+}
+
+@media print {
+    @page {
+        margin: 1.25cm;
+    }
+
+    body {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    .sw-topbar,
+    .sw-sidebar,
+    .sw-sidebar-backdrop,
+    .sw-footer,
+    .sw-print-hide {
+        display: none !important;
+    }
+
+    .sw-body,
+    .sw-main {
+        display: block !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+        background: #fff !important;
+    }
+
+    .sw-print-only {
+        display: block !important;
+    }
+
+    .sw-card,
+    .sw-list-card,
+    .sw-modal,
+    .sw-chart-card {
+        border: 1px solid #999 !important;
+        box-shadow: none !important;
+    }
+
+    a {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+
+    .sw-print-break-before {
+        page-break-before: always;
+        break-before: page;
+    }
+
+    .sw-print-break-after {
+        page-break-after: always;
+        break-after: page;
+    }
+
+    .sw-print-avoid-break {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ===== src/components/product-card.css ===== */
+/* Product card — imagen + rating + precio + CTA. Componente nuevo (0.5.0).
+   Inspirado en catálogos de producto/curso, pero con lenguaje propio de
+   Soffiweb: precio tipográfico (no píldora), chip vidrio-esmerilado sobre la
+   imagen, CTA con --p en vez de un botón casi-negro genérico.
+
+   <div class="sw-product-card-grid">
+       <article class="sw-product-card">
+           <div class="sw-product-card-media">
+               <img src="..." alt="...">
+               <span class="sw-product-card-tag sw-product-card-tag-accent">
+                   <i class="fa-solid fa-bolt"></i> Oferta
+               </span>
+               <button type="button" class="sw-product-card-fav" aria-label="Guardar" aria-pressed="false">
+                   <i class="fa-regular fa-heart"></i>
+               </button>
+           </div>
+           <div class="sw-product-card-body">
+               <h3 class="sw-product-card-title">Nombre del producto</h3>
+               <p class="sw-product-card-desc">Descripción corta.</p>
+               <ul class="sw-product-card-meta">
+                   <li><i class="fa-solid fa-clock"></i> 23 horas</li>
+               </ul>
+               <div class="sw-product-card-foot">
+                   <span class="sw-rating" aria-label="4.7 de 5">
+                       <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                       <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                       <i class="fa-solid fa-star-half-stroke"></i>
+                       <span class="sw-rating-value">4.7</span>
+                   </span>
+                   <span class="sw-product-card-price">$39<small>.00</small></span>
+               </div>
+               <button class="sw-btn sw-btn-primary sw-product-card-cta">Comprar ahora</button>
+           </div>
+       </article>
+   </div> */
+
+/* --sw-grid-min / --sw-grid-cols pisables — ver la nota completa en
+   .sw-action-card-grid (action-card.css). */
+.sw-product-card-grid {
+    --sw-grid-min: 250px;
+    display: grid;
+    grid-template-columns: repeat(var(--sw-grid-cols, auto-fit), minmax(var(--sw-grid-min), 1fr));
+    gap: 1.25rem;
+}
+
+.sw-product-card-grid-sm {
+    --sw-grid-min: 200px;
+}
+
+.sw-product-card-grid-lg {
+    --sw-grid-min: 300px;
+}
+
+.sw-product-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--b1);
+    border: var(--brd);
+    border-radius: var(--rl);
+    overflow: hidden;
+    box-shadow: var(--sh-sm);
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.sw-product-card:hover {
+    box-shadow: var(--sh-md);
+    border-color: rgba(40, 68, 154, 0.32);
+    border-color: color-mix(in srgb, var(--p) 32%, transparent);
+    transform: translateY(-3px);
+}
+
+.sw-product-card-media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--b2);
+}
+
+.sw-product-card-media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.sw-product-card:hover .sw-product-card-media img {
+    transform: scale(1.045);
+}
+
+.sw-product-card-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.32rem 0.7rem;
+    border-radius: var(--sw-radius-pill);
+    font-size: var(--sw-text-2xs);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--p);
+    background: rgba(253, 253, 255, 0.82);
+    background: color-mix(in srgb, var(--b1) 82%, transparent);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.sw-product-card-tag-accent {
+    color: #bc5882;
+    color: color-mix(in srgb, var(--a) 75%, #000);
+}
+
+.sw-product-card-tag-success {
+    color: #00734c;
+    color: color-mix(in srgb, var(--su) 62%, #000);
+}
+
+.sw-product-card-tag-warning {
+    color: #7d4c00;
+    color: color-mix(in srgb, var(--wa) 50%, #000);
+}
+
+.sw-product-card-fav {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    color: var(--bc);
+    background: rgba(253, 253, 255, 0.82);
+    background: color-mix(in srgb, var(--b1) 82%, transparent);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: color 0.15s, transform 0.15s;
+}
+
+.sw-product-card-fav:hover {
+    transform: scale(1.08);
+}
+
+.sw-product-card-fav[aria-pressed="true"] {
+    color: var(--a);
+}
+
+.sw-product-card-fav[aria-pressed="true"] i {
+    font-weight: 900;
+}
+
+.sw-product-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.1rem 1.25rem 1.25rem;
+}
+
+.sw-product-card-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0 0 0.35rem;
+    color: var(--bc);
+    font-size: var(--sw-text-lg);
+    font-weight: var(--sw-font-semibold);
+    line-height: var(--sw-leading-tight);
+}
+
+.sw-product-card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0 0 0.75rem;
+    color: var(--bc2);
+    font-size: var(--sw-text-sm);
+    line-height: var(--sw-leading-base);
+}
+
+.sw-product-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0 0 0.9rem;
+    padding: 0;
+    list-style: none;
+}
+
+.sw-product-card-meta li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--bc2);
+    font-size: var(--sw-text-xs);
+}
+
+.sw-product-card-meta i {
+    width: 14px;
+    text-align: center;
+    color: var(--p);
+    font-size: 11px;
+}
+
+.sw-product-card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    margin-bottom: 0.9rem;
+}
+
+.sw-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: var(--wa);
+    font-size: 11px;
+}
+
+.sw-rating-value {
+    margin-left: 5px;
+    color: var(--bc2);
+    font-size: var(--sw-text-xs);
+    font-weight: 700;
+}
+
+.sw-product-card-price {
+    color: var(--p);
+    font-size: var(--sw-text-xl);
+    font-weight: var(--sw-font-bold);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.sw-product-card-price small {
+    font-size: var(--sw-text-xs);
+    font-weight: var(--sw-font-semibold);
+    color: var(--bc2);
+}
+
+.sw-product-card-cta {
+    width: 100%;
+    justify-content: center;
+}
+
+[data-theme="dark"] .sw-product-card-tag-accent {
+    color: var(--a);
+}
+
+[data-theme="dark"] .sw-product-card-tag-success {
+    color: var(--su);
+}
+
+[data-theme="dark"] .sw-product-card-tag-warning {
+    color: var(--wa);
+}
+
+/* ===== src/components/profile-card.css ===== */
+/* Profile card — avatar + acciones divididas. Componente nuevo (0.5.0).
+   Firma propia de Soffiweb: anillo de avatar en degradé --p→--a (no un
+   ícono decorativo suelto) y punto de estado real (online/activo) en vez de
+   un sparkle sin función. El menú "..." y sus acciones reusan .sw-bico y
+   .sw-row-menu-dropdown ya existentes — cero CSS nuevo para eso.
+
+   <article class="sw-profile-card">
+       <div class="sw-profile-card-head">
+           <div class="sw-profile-card-avatar-wrap">
+               <span class="sw-user-avatar sw-avatar-lg sw-profile-card-avatar">
+                   <img src="..." class="sw-user-avatar-img" alt="">
+               </span>
+               <span class="sw-profile-card-status" title="Activo"></span>
+           </div>
+           <div class="sw-row-menu">
+               <button type="button" class="sw-bico sw-row-menu-trigger" aria-haspopup="true"
+                       aria-expanded="false" onclick="swToggleRowMenu(this)">
+                   <i class="fa-solid fa-ellipsis"></i>
+               </button>
+               <div class="sw-row-menu-dropdown">
+                   <a href="..." class="sw-row-menu-item"><i class="fa-solid fa-pen"></i> Editar</a>
+               </div>
+           </div>
+       </div>
+       <h3 class="sw-profile-card-name">Ana Torres</h3>
+       <p class="sw-profile-card-role"><i class="fa-solid fa-location-dot"></i> Panamá, PA</p>
+       <p class="sw-profile-card-desc">Contadora senior, 6 años en nómina.</p>
+       <div class="sw-profile-card-actions">
+           <a href="mailto:..." class="sw-profile-card-action"><i class="fa-regular fa-envelope"></i> Enviar correo</a>
+           <a href="..." class="sw-profile-card-action"><i class="fa-solid fa-pen"></i> Editar perfil</a>
+       </div>
+   </article> */
+
+/* --sw-grid-min / --sw-grid-cols pisables — ver la nota completa en
+   .sw-action-card-grid (action-card.css). */
+.sw-profile-card-grid {
+    --sw-grid-min: 260px;
+    display: grid;
+    grid-template-columns: repeat(var(--sw-grid-cols, auto-fit), minmax(var(--sw-grid-min), 1fr));
+    gap: 1.25rem;
+}
+
+.sw-profile-card-grid-sm {
+    --sw-grid-min: 210px;
+}
+
+.sw-profile-card-grid-lg {
+    --sw-grid-min: 310px;
+}
+
+.sw-profile-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1.3rem 1.3rem 0;
+    background: var(--b1);
+    border: var(--brd);
+    border-radius: var(--rl);
+    overflow: hidden;
+    box-shadow: var(--sh-sm);
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.sw-profile-card:hover {
+    box-shadow: var(--sh-md);
+    border-color: rgba(40, 68, 154, 0.32);
+    border-color: color-mix(in srgb, var(--p) 32%, transparent);
+    transform: translateY(-3px);
+}
+
+.sw-profile-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 0.9rem;
+}
+
+.sw-profile-card-avatar-wrap {
+    position: relative;
+    display: inline-flex;
+    padding: 3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--p), var(--a));
+    flex-shrink: 0;
+}
+
+.sw-profile-card-avatar {
+    border: 3px solid var(--b1);
+}
+
+.sw-profile-card-status {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--su);
+    border: 2px solid var(--b1);
+}
+
+.sw-profile-card-status-away {
+    background: var(--wa);
+}
+
+.sw-profile-card-status-offline {
+    background: var(--bc2);
+}
+
+.sw-profile-card-name {
+    margin: 0;
+    color: var(--bc);
+    font-size: var(--sw-text-lg);
+    font-weight: var(--sw-font-bold);
+    line-height: var(--sw-leading-tight);
+}
+
+.sw-profile-card-role {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 3px 0 0;
+    color: var(--bc2);
+    font-size: var(--sw-text-xs);
+    font-weight: 500;
+}
+
+.sw-profile-card-role i {
+    color: var(--p);
+    font-size: 11px;
+}
+
+.sw-profile-card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0.6rem 0 0;
+    color: var(--bc2);
+    font-size: var(--sw-text-sm);
+    line-height: var(--sw-leading-base);
+}
+
+.sw-profile-card-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 1.1rem;
+    margin-left: -1.3rem;
+    margin-right: -1.3rem;
+    border-top: var(--brd);
+}
+
+.sw-profile-card-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0.85rem 0.5rem;
+    color: var(--p);
+    font-size: var(--sw-text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.sw-profile-card-action:hover {
+    background: var(--b2);
+    text-decoration: none;
+    color: var(--p);
+}
+
+.sw-profile-card-action + .sw-profile-card-action {
+    border-left: var(--brd);
+}
+
+/* ===== src/components/progress.css ===== */
+/* Barra de progreso
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-progress-track {
+    height: 9px;
+    background: rgba(67, 97, 238, 0.18);
+    background: color-mix(in srgb, var(--s) 18%, transparent);
+    border-radius: 25px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.sw-progress-bar {
+    height: 100%;
+    border-radius: 25px;
+}
+
+/* ===== src/components/rol-summary.css ===== */
+/* Resumen de rol — de gesnom (rama `dev`), único aporte exclusivo de gesnom
+   al estándar. Banda compacta con el rol/periodo vigente sobre los listados
+   de nómina.
+
+   Fix de compatibilidad aplicado al portar: la fuente en gesnom `dev` usaba
+   color-mix() sin fallback estático (0/110 en toda la rama). Aquí va con
+   el mixin. */
+
+.sw-rol-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px 32px;
+    margin: 0 0 18px;
+    padding: 16px 20px;
+    border: var(--brd);
+    border-left: 4px solid var(--p);
+    border-radius: var(--r);
+
+    background: #f2f4fa;
+    background: color-mix(in srgb, var(--p) 5%, var(--b1));
+}
+
+.sw-rol-summary-main {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1 1 320px;
+    min-width: 0;
+}
+
+.sw-rol-summary-tag {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 6px;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--sw-radius-pill);
+    color: var(--p);
+    font-size: var(--sw-text-2xs);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    text-transform: uppercase;
+
+    background: rgba(40, 68, 154, 0.13);
+    background: color-mix(in srgb, var(--p) 13%, transparent);
+}
+
+.sw-rol-summary-title {
+    color: var(--bc);
+    /* 19px no cae en un escalón de la escala tipográfica (entre --sw-text-lg
+       16px y --sw-text-xl 20px). Se deja literal para no cambiar el tamaño
+       visual mientras se sigue construyendo sobre este componente en gesnom. */
+    font-size: 19px;
+    font-weight: 600;
+    line-height: var(--sw-leading-tight);
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.sw-rol-summary-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    flex: 0 1 auto;
+    gap: 0;
+    margin: 0;
+}
+
+.sw-rol-summary-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 0 18px;
+    border-left: var(--brd);
+    min-width: 92px;
+}
+
+.sw-rol-summary-stat:first-child {
+    border-left: 0;
+    padding-left: 0;
+}
+
+.sw-rol-summary-stat:last-child {
+    padding-right: 0;
+}
+
+.sw-rol-summary-label {
+    color: var(--bc2);
+    font-size: var(--sw-text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    line-height: var(--sw-leading-tight);
+    margin: 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.sw-rol-summary-value {
+    color: var(--bc);
+    font-size: var(--sw-text-md);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: var(--sw-leading-tight);
+    margin: 0;
+    white-space: nowrap;
+}
+
+.sw-rol-summary-unit {
+    color: var(--bc2);
+    font-size: var(--sw-text-xs);
+    font-weight: 500;
+}
+
+/* ===== src/components/skeleton.css ===== */
+/* Skeleton / carga de contenido */
+
+@keyframes sw-skeleton-pulse {
+    0%,
+    100% {
+        opacity: 0.55;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.sw-skeleton {
+    display: block;
+    width: var(--sw-skeleton-width, 100%);
+    height: var(--sw-skeleton-height, 1rem);
+    min-height: var(--sw-skeleton-height, 1rem);
+    border-radius: var(--r);
+    background: var(--b2);
+    animation: sw-skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+.sw-skeleton-card {
+    width: min(100%, var(--sw-skeleton-card-width, 420px));
+}
+
+.sw-skeleton-layout {
+    display: grid;
+    gap: var(--sw-spacing-md);
+    width: 100%;
+    min-width: 0;
+}
+
+.sw-skeleton-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sw-spacing-sm);
+    width: 100%;
+    min-width: 0;
+}
+
+.sw-skeleton-content {
+    display: grid;
+    flex: 1;
+    gap: var(--sw-spacing-sm);
+    min-width: 0;
+}
+
+.sw-skeleton-text {
+    --sw-skeleton-height: 0.85rem;
+}
+
+.sw-skeleton-title {
+    --sw-skeleton-width: min(70%, 320px);
+    --sw-skeleton-height: 1.35rem;
+}
+
+.sw-skeleton-avatar {
+    --sw-skeleton-width: 42px;
+    --sw-skeleton-height: 42px;
+    flex: 0 0 42px;
+    border-radius: 50%;
+}
+
+.sw-skeleton-media {
+    --sw-skeleton-height: 150px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sw-skeleton {
+        animation: none;
+    }
+}
+
+/* ===== src/components/spinner.css ===== */
+/* Indicador de carga */
+
+@keyframes sw-spinner-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.sw-spinner {
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 3px solid var(--bc2);
+    border-top-color: var(--p);
+    border-radius: 50%;
+    animation: sw-spinner-rotate 0.7s linear infinite;
+    vertical-align: middle;
+}
+
+.sw-spinner-sm {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-width: 2px;
+}
+
+.sw-spinner-lg {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-width: 4px;
+}
+
+.sw-spinner-light {
+    border-color: rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sw-spinner {
+        animation-duration: 1.8s;
+    }
+}
+
+/* ===== src/components/stepper.css ===== */
+/* Stepper / wizard */
+
+.sw-stepper {
+    display: flex;
+    width: 100%;
+}
+
+.sw-step {
+    position: relative;
+    display: flex;
+    flex: 1;
+    gap: 0.65rem;
+    min-width: 0;
+}
+
+.sw-step:not(:last-child)::after {
+    position: absolute;
+    top: 16px;
+    left: 34px;
+    right: 12px;
+    height: 2px;
+    background: var(--bc2);
+    content: "";
+}
+
+.sw-step-marker {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    flex: 0 0 32px;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--bc2);
+    border-radius: 50%;
+    background: var(--b1);
+    color: var(--bc2);
+    font-size: var(--sw-text-sm);
+    font-weight: 700;
+}
+
+.sw-step-content {
+    min-width: 0;
+    padding-right: 0.5rem;
+}
+
+.sw-step-title {
+    display: block;
+    color: var(--bc);
+    font-size: var(--sw-text-base);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.sw-step-description {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--bc2);
+    font-size: var(--sw-text-sm);
+    line-height: 1.35;
+}
+
+.sw-step.is-active .sw-step-marker {
+    border-color: var(--p);
+    background: var(--p);
+    color: var(--pc);
+}
+
+.sw-step.is-complete .sw-step-marker {
+    border-color: var(--su);
+    background: var(--su);
+    color: var(--btn-text);
+}
+
+.sw-step.is-complete:not(:last-child)::after {
+    background: var(--su);
+}
+
+.sw-stepper-vertical {
+    display: grid;
+    gap: 0;
+}
+
+.sw-stepper-vertical .sw-step {
+    flex: none;
+    padding-bottom: 1.25rem;
+}
+
+.sw-stepper-vertical .sw-step:not(:last-child)::after {
+    top: 34px;
+    bottom: 0;
+    left: 15px;
+    right: auto;
+    width: 2px;
+    height: auto;
+}
+
+@media (max-width: 767.98px) {
+    .sw-stepper:not(.sw-stepper-vertical) {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .sw-stepper:not(.sw-stepper-vertical) .sw-step:not(:last-child)::after {
+        display: none;
+    }
+}
+
+/* ===== src/components/switch.css ===== */
+/* Switch de formulario */
+
+.sw-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--bc);
+    cursor: pointer;
+}
+
+.sw-switch-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.sw-switch-track {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 42px;
+    align-items: center;
+    width: 42px;
+    height: 24px;
+    padding: 3px;
+    border-radius: var(--sw-radius-pill);
+    background: var(--bc2);
+    transition: background 0.15s;
+}
+
+.sw-switch-thumb {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--b1);
+    box-shadow: var(--sh-sm);
+    transition: transform 0.15s;
+}
+
+.sw-switch-input:checked + .sw-switch-track {
+    background: var(--p);
+}
+
+.sw-switch-input:checked + .sw-switch-track .sw-switch-thumb {
+    transform: translateX(18px);
+}
+
+.sw-switch-input:focus-visible + .sw-switch-track {
+    outline: 2px solid var(--a);
+    outline-offset: 2px;
+}
+
+.sw-switch-input:disabled + .sw-switch-track,
+.sw-switch-input:disabled ~ .sw-switch-label {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+/* ===== src/components/tables.css ===== */
+/* Tablas, cabecera/columna fija, toolbar de listado, menú de fila, paginación de listado
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-table-wrap {
+    width: 100%;
+    max-width: 100%;
+    border: var(--brd);
+    border-radius: var(--rl);
+    overflow: hidden;
+    background: var(--b1);
+    box-shadow: var(--sh-sm);
+}
+
+.sw-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--sw-text-base);
+    font-variant-numeric: tabular-nums;
+}
+
+.sw-table thead th {
+    background: var(--th-bg);
+    font-size: var(--sw-text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--th-color);
+    padding: 0.62rem 0.8125rem;
+    border-bottom: 2px solid rgba(40, 68, 154, 0.2);
+    border-bottom: 2px solid color-mix(in srgb, var(--p) 20%, transparent);
+    text-align: left;
+}
+
+.sw-table tbody td {
+    padding: var(--sw-spacing-sm) 0.8125rem;
+    border-bottom: var(--brd);
+    color: var(--bc);
+    vertical-align: middle;
+    background: var(--b1);
+    line-height: 1.35;
+}
+
+/* Hasta 1280px la tabla normal se ajusta sola: misma densidad que
+   .sw-table-compact. Por encima conserva letra y relleno normales.
+   .sw-table-compact queda densa en todos los anchos (reportes con muchas
+   columnas). */
+@media (max-width: 1280.98px) {
+    .sw-table thead th {
+        padding: 0.55rem 0.65rem;
+        font-size: var(--sw-text-2xs);
+    }
+
+    .sw-table tbody td {
+        padding: 0.45rem 0.65rem;
+        font-size: var(--sw-text-sm);
+    }
+}
+
+.sw-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.sw-table-head th {
+    background: var(--th-bg);
+    color: var(--th-color);
+}
+
+.sw-table-striped tbody tr:nth-child(even) td {
+    background: #f4f6fd;
+    background: color-mix(in srgb, var(--b2) 55%, var(--b1));
+}
+
+.sw-row-error td {
+    background: #fbebf0;
+    background: color-mix(in srgb, var(--er) 8%, var(--b1));
+}
+
+.sw-row-warning td {
+    background: #fdf3e6;
+    background: color-mix(in srgb, var(--wa) 10%, var(--b1));
+}
+
+/* Tabla con inputs dentro de celdas (ej. detalle de deposito) — necesita
+   mas aire que una tabla de solo lectura para que los controles no se
+   vean apretados. */
+.sw-detail-table td {
+    padding: 0.65rem 0.85rem;
+}
+
+.sw-detail-table .sw-input {
+    height: 38px;
+}
+
+.sw-detail-table input[type="number"]::-webkit-inner-spin-button,
+.sw-detail-table input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+.sw-detail-table input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.sw-detail-table tfoot th {
+    padding: 0.65rem 0.85rem;
+    background: var(--b2);
+    color: var(--bc);
+    font-size: var(--sw-text-sm);
+}
+
+.sw-detail-table tfoot .sw-input {
+    font-weight: 700;
+    background: var(--b2);
+}
+
+.sw-table tbody tr:hover td {
+    background: var(--b2);
+}
+
+.sw-empty-icon {
+    color: var(--bc2);
+    font-size: 2rem;
+}
+
+.sw-empty-title {
+    color: var(--bc);
+    font-weight: 700;
+}
+
+.sw-empty-copy {
+    color: var(--bc2);
+}
+
+.sw-crud-container {
+    padding-top: 30px;
+    padding-bottom: 22px;
+}
+
+.sw-crud-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--sw-spacing-md);
+}
+
+.sw-crud-title {
+    min-width: 0;
+}
+
+.sw-crud-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: calc(var(--sw-spacing-sm) + 0.2rem);
+}
+
+/* Debe vivir aqui, despues de la regla base: si queda en otro archivo
+   anterior, la base (mismo peso) gana y el titulo se pega a la derecha. */
+@media (max-width: 991.98px) {
+    .sw-crud-head {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .sw-crud-actions {
+        justify-content: flex-start;
+    }
+}
+
+/* Variante opcional: en celular los botones van de a dos por fila en vez de
+   apilarse. Un solo boton ocupa la fila completa; con un .sw-dropdown, el
+   boton principal queda a la izquierda y el menu a la derecha. */
+@media (max-width: 575.98px) {
+    .sw-crud-actions.sw-crud-actions-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .sw-crud-actions.sw-crud-actions-row > .sw-btn,
+    .sw-crud-actions.sw-crud-actions-row > .sw-dropdown {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 0;
+    }
+}
+
+/* Borde mas marcado en el boton de limpiar, para que no se vea mas chico
+   que Buscar (que es un bloque solido). */
+.sw-list-filter-actions .sw-btn-ghost {
+    border-color: rgba(67, 97, 238, 0.55);
+    border-color: color-mix(in srgb, var(--p) 55%, transparent);
+}
+
+.sw-crud-actions .sw-btn,
+.sw-list-search-row .sw-btn,
+.sw-list-filter-actions .sw-btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.sw-card.sw-list-card {
+    overflow: visible;
+    padding: 22px;
+    box-shadow: 0 8px 24px rgba(40, 68, 154, 0.08);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--p) 8%, transparent);
+}
+
+.sw-card.sw-card-compact,
+.sw-card.sw-list-card.sw-card-compact {
+    padding: var(--sw-spacing-md);
+}
+
+.sw-card-compact .sw-list-toolbar {
+    gap: calc(var(--sw-spacing-sm) + 0.2rem);
+    padding-bottom: 10px;
+}
+
+.sw-card-compact .sw-card-title {
+    margin-bottom: 0;
+    font-size: var(--sw-text-lg);
+    line-height: 1.25;
+}
+
+.sw-list-toolbar {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 13px;
+    padding: 0 0 var(--sw-spacing-md);
+    border-bottom: 0;
+    background: transparent;
+}
+
+.sw-list-search {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: var(--sw-spacing-sm);
+    min-width: 0;
+    width: 100%;
+}
+
+.sw-list-search-label {
+    color: var(--bc2);
+    font-size: var(--sw-text-base);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.sw-list-search-row,
+.sw-list-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 20px;
+    width: 100%;
+}
+
+.sw-list-search-row .sw-input-icon-wrap,
+.sw-list-filter-main {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Con varios filtros el buscador toma el ancho que sobra, pero pasa a la
+   línea de abajo antes de quedar diminuto (tablet). */
+.sw-list-filter-row > .sw-list-filter-main {
+    flex: 1 1 220px;
+}
+
+.sw-list-filter-control {
+    flex: 0 1 185px;
+    min-width: 165px;
+}
+
+/* Selector corto dentro de la fila de filtros ("Buscar por", estado...). */
+.sw-list-filter-control.sw-list-filter-control-sm {
+    flex: 0 1 190px;
+    min-width: 150px;
+}
+
+.sw-list-filter-actions {
+    display: flex;
+    /* stretch: un boton solo con icono (limpiar) toma la altura del boton con
+       texto (Buscar) en vez de quedar mas bajo. */
+    align-items: stretch;
+    gap: var(--sw-spacing-sm);
+    flex: 0 0 auto;
+}
+
+@media (min-width: 576px) {
+    .sw-list-filter-row > .sw-list-filter-actions,
+    .sw-list-search-row > .sw-list-filter-actions {
+        transform: translateY(12px);
+    }
+
+    .sw-list-search > .sw-row .sw-list-filter-actions {
+        transform: translateY(4px);
+    }
+}
+
+/* Conteo a la izquierda y contexto a la derecha. Cuando no caben en una
+   línea (celular, o un contexto largo como "Análisis del ... al ..."), el
+   contexto baja a la siguiente y puede partirse: antes se salía de la card. */
+.sw-list-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 12px;
+    min-height: 22px;
+}
+
+.sw-list-count,
+.sw-list-context {
+    color: #636c83;
+    color: color-mix(in srgb, var(--bc2) 88%, var(--p));
+    font-size: var(--sw-text-base);
+    font-weight: 500;
+}
+
+.sw-list-count {
+    white-space: nowrap;
+}
+
+.sw-list-context {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.sw-list-table-wrap {
+    border: var(--brd-s);
+    border-radius: 1rem;
+    box-shadow: none;
+    overflow: auto;
+    max-height: 70vh;
+}
+
+@media (max-width: 575.98px) {
+    .sw-list-search-row,
+    .sw-list-filter-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    /* Buscar + limpiar (+ PDF) comparten fila en vez de apilarse. */
+    .sw-list-filter-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .sw-list-search .sw-list-filter-actions {
+        transform: none;
+    }
+
+    .sw-list-search-row .sw-input-icon-wrap,
+    .sw-list-filter-row > .sw-list-filter-main,
+    .sw-list-filter-main,
+    .sw-list-filter-control,
+    .sw-list-filter-control.sw-list-filter-control-sm {
+        flex-basis: auto;
+        max-width: none;
+        min-width: 0;
+    }
+
+    .sw-list-search-row .sw-btn,
+    .sw-list-filter-actions .sw-btn {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .sw-list-filter-actions .sw-btn {
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+    }
+
+
+}
+
+/* Filtros plegables en celular. En escritorio y tablet el panel se disuelve
+   (display: contents) y sus controles quedan en la fila de filtros; por debajo
+   de 576px se esconde detras del boton .sw-list-filters-toggle, que usa el
+   collapse de la libreria (data-sw-collapse). */
+.sw-list-filters-toggle {
+    display: none;
+}
+
+@media (min-width: 576px) {
+    .sw-list-filters-panel,
+    .sw-list-filters-panel.collapse:not(.show) {
+        display: contents;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .sw-list-filters-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--sw-spacing-sm);
+        width: 100%;
+    }
+
+    .sw-list-filters-toggle[aria-expanded="true"] .sw-list-filters-chevron {
+        transform: rotate(180deg);
+    }
+
+    .sw-list-filters-panel.show {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        gap: 8px;
+    }
+}
+
+.sw-list-filters-chevron {
+    transition: transform 0.15s;
+}
+
+.sw-list-filters-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.4em;
+    height: 1.4em;
+    margin-left: 0.4em;
+    padding: 0 0.4em;
+    border-radius: 999px;
+    background: var(--p);
+    color: #fff;
+    font-size: var(--sw-text-xs);
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Cabecera fija mientras se scrollea vertical dentro del wrap acotado */
+.sw-list-table-wrap thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+/* Columna marcada fija a la derecha en todos los anchos: en movil es lo que
+   mantiene alcanzables las acciones mientras se hace scroll horizontal.
+   Agregar .sw-table-sticky-col al th y td de la columna elegida. */
+.sw-list-table-wrap tr > .sw-table-sticky-col {
+    position: sticky;
+    right: 0;
+    z-index: 1;
+    /* Ancho justo para su contenido: si la tabla reparte ancho sobrante, la
+       columna fija no debe crecer y tapar las demas en pantallas angostas. */
+    width: 1%;
+    white-space: nowrap;
+}
+
+.sw-list-table-wrap thead tr > .sw-table-sticky-col {
+    top: 0;
+    z-index: 3;
+}
+
+.sw-list-table-wrap.is-table-sticky-displaced tr > .sw-table-sticky-col::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--sw-table-sticky-border);
+    pointer-events: none;
+}
+
+.sw-table-min-md {
+    min-width: 760px;
+}
+
+.sw-table-min-lg {
+    min-width: 920px;
+}
+
+.sw-table-min-xl {
+    min-width: 1080px;
+}
+
+.sw-table-compact thead th {
+    padding: 0.55rem 0.65rem;
+    font-size: var(--sw-text-2xs);
+}
+
+.sw-table-compact tbody td {
+    padding: 0.45rem 0.65rem;
+    font-size: var(--sw-text-sm);
+}
+
+/* Las utilidades de alineacion pierden contra `.sw-table thead th`
+   (text-align: left, mas especifica): aqui se refuerzan para th y td, para
+   que el encabezado pueda alinearse igual que su columna. */
+.sw-table th.sw-text-center,
+.sw-table td.sw-text-center,
+.sw-table th.text-center,
+.sw-table td.text-center {
+    text-align: center;
+}
+
+.sw-table th.sw-text-right,
+.sw-table td.sw-text-right,
+.sw-table th.text-right,
+.sw-table td.text-right {
+    text-align: right;
+}
+
+.sw-table-main-cell,
+.sw-text-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.sw-table-expand-wrap {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--sw-spacing-sm) + 0.3rem);
+}
+
+.sw-table-select-all-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--sw-spacing-sm) + 0.3rem);
+}
+
+.sw-table-expand {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--sw-radius-sm);
+    background: transparent;
+    color: var(--p);
+    cursor: pointer;
+}
+
+.sw-table-expand:hover,
+.sw-table-expand:focus-visible {
+    background: var(--b2);
+}
+
+.sw-table-expand i {
+    transition: transform 0.2s ease;
+}
+
+.sw-table-expand[aria-expanded="true"] i {
+    transform: rotate(90deg);
+}
+
+.sw-table-detail-row[hidden] {
+    display: none;
+}
+
+.sw-table-detail-row > td {
+    padding: 0;
+    background: var(--b2) !important;
+}
+
+.sw-table-detail {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sw-spacing-md);
+    padding: var(--sw-spacing-md);
+}
+
+.sw-table-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.sw-table-detail-label {
+    color: var(--bc2);
+    font-size: var(--sw-text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sw-table-detail-value {
+    color: var(--bc);
+    font-size: var(--sw-text-sm);
+}
+
+/* --sw-table-thumb-size pisable — mismo criterio que --sw-action-card-icon-size
+   (ver la nota completa en action-card.css). */
+.sw-table-thumb {
+    --sw-table-thumb-size: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--sw-table-thumb-size);
+    height: var(--sw-table-thumb-size);
+    border-radius: var(--r);
+    border: var(--brd);
+    background: var(--b2);
+    overflow: hidden;
+    color: var(--bc2);
+    font-size: var(--sw-text-md);
+}
+
+.sw-table-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sw-table-thumb-lg {
+    width: 64px;
+    height: 64px;
+    font-size: var(--sw-text-2xl);
+}
+
+.sw-table-title {
+    display: block;
+    max-width: 360px;
+    overflow: hidden;
+    color: var(--bc);
+    font-size: var(--sw-text-md);
+    font-weight: 700;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sw-table-subtitle,
+.sw-text-stack small {
+    display: block;
+    max-width: 300px;
+    overflow: hidden;
+    color: #5f6a85;
+    color: color-mix(in srgb, var(--bc2) 82%, var(--p));
+    font-size: var(--sw-text-xs);
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sw-text-stack a {
+    display: block;
+    max-width: 300px;
+    overflow: hidden;
+    color: var(--p);
+    font-size: var(--sw-text-base);
+    font-weight: 500;
+    line-height: 1.35;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sw-text-stack a:hover {
+    color: var(--s);
+    text-decoration: none;
+}
+
+.sw-text-ellipsis {
+    display: block;
+    max-width: 340px;
+    overflow: hidden;
+    color: var(--bc);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sw-table-actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+}
+
+/* Menu de acciones secundarias por fila (icono "..." + panel flotante) */
+.sw-row-menu {
+    position: relative;
+    display: inline-flex;
+}
+
+.sw-row-menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    z-index: var(--sw-z-dropdown);
+    min-width: 190px;
+    padding: 6px;
+    background: var(--b1);
+    border: var(--brd);
+    border-radius: var(--r);
+    box-shadow: var(--sh-md);
+    text-align: left;
+}
+
+.sw-row-menu-dropdown.open {
+    display: block;
+}
+
+/* Misma capa dropdown que .sw-row-menu-dropdown normal (arriba): es el mismo
+   menu, solo que se posiciona fixed para escapar de un contenedor con
+   overflow. Antes tenia z-index: 3000 fijo — por encima de modal (1060) y
+   toast (1080) sin motivo; si el menu quedaba abierto y se abria un modal,
+   el menu tapaba al modal. Ver src/tokens/z-index.css. */
+.sw-row-menu-dropdown.is-portal {
+    position: fixed;
+    top: 0;
+    right: auto;
+    left: 0;
+    z-index: var(--sw-z-dropdown);
+}
+
+.sw-row-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    padding: var(--sw-spacing-sm) 10px;
+    background: transparent;
+    border: 0;
+    border-radius: var(--r);
+    color: var(--bc);
+    font-family: inherit;
+    font-size: var(--sw-text-base);
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sw-row-menu-item:hover {
+    background: var(--b2);
+    color: var(--bc);
+    text-decoration: none;
+}
+
+.sw-row-menu-item i {
+    width: 16px;
+    text-align: center;
+    color: var(--bc2);
+}
+
+/* Acciones de fila que pasan al menu "..." en pantallas compactas (< 1200px:
+   celular, tablet y portatil chico, donde varios iconos sueltos le quitan
+   ancho a las demas columnas).
+   Regla: con 1 o 2 acciones van todas sueltas; con 3 o mas queda suelta solo
+   la principal y el resto se mueve al menu. Cada accion que se mueve se escribe
+   dos veces: el boton con .sw-bico-hide-compact (se oculta) y un
+   .sw-row-menu-item.sw-row-menu-compact-only dentro del menu (solo se ve por
+   debajo de 1200px). Si la fila no tenia menu, el menu entero lleva
+   .sw-row-menu-compact-only y solo aparece por debajo de 1200px. Nunca crear
+   un menu con una sola opcion. */
+.sw-row-menu-item.sw-row-menu-compact-only,
+.sw-row-menu.sw-row-menu-compact-only {
+    display: none;
+}
+
+@media (max-width: 1199.98px) {
+    .sw-table-actions .sw-bico-hide-compact,
+    .sw-table-actions form.sw-bico-hide-compact {
+        display: none;
+    }
+
+    .sw-row-menu-item.sw-row-menu-compact-only {
+        display: flex;
+    }
+
+    .sw-row-menu.sw-row-menu-compact-only {
+        display: inline-flex;
+    }
+}
+
+.sw-table .sw-badge {
+    justify-content: center;
+    min-width: 82px;
+}
+
+.sw-table .sw-badge i {
+    font-size: 6px;
+}
+
+.sw-list-pagination {
+    display: flex;
+    justify-content: flex-start;
+    padding: var(--sw-spacing-md) 0 var(--sw-spacing-xs);
+    border-top: 0;
+}
+
+.sw-list-pagination nav.sw-pagination-nav {
+    align-items: center;
+    display: flex;
+    gap: var(--sw-spacing-md);
+    justify-content: space-between;
+    width: 100%;
+}
+
+.sw-pagination-summary {
+    color: var(--bc2);
+    font-size: var(--sw-text-xs);
+    margin: 0;
+}
+
+.sw-pagination-summary span {
+    color: var(--bc);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+
+.sw-list-pagination .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    gap: var(--sw-spacing-xs);
+    margin: 0;
+    padding: 0;
+}
+
+.sw-list-pagination .page-link,
+.sw-list-pagination .pagination li a,
+.sw-list-pagination .pagination li span {
+    border: var(--brd);
+    border-radius: var(--r);
+    color: var(--p);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    font-size: var(--sw-text-xs);
+    font-weight: 700;
+    padding: 0 0.75rem;
+}
+
+.sw-list-pagination .page-item.active .page-link,
+.sw-list-pagination .pagination li.active a,
+.sw-list-pagination .pagination li.active span {
+    background: var(--p);
+    border-color: var(--p);
+    color: var(--btn-text);
+}
+
+/* --- Totales al pie de la tabla. Opt-in: la tabla normal no lleva la clase y
+   su tfoot (si lo tiene) queda sin tratamiento.
+
+   Misma densidad que el cuerpo: relleno y letra de .sw-table normal por
+   encima de 1280px, y los de .sw-table-compact por debajo (o siempre, si la
+   tabla lleva .sw-table-compact), para que las cifras del pie queden
+   alineadas con su columna.
+
+   La alineacion NO se fuerza: cada th/td del pie sigue a su columna con
+   .sw-text-right / .sw-text-center (igual que el cuerpo). Sin clase, a la
+   izquierda.
+
+   Dentro de .sw-list-table-wrap el pie queda anclado abajo mientras se
+   scrollea, y una celda con .sw-table-sticky-col queda fija a la derecha
+   igual que en cabecera y cuerpo.
+
+   Fix de compatibilidad aplicado al portar: color-mix() sin fallback en la
+   fuente (gesnom `dev`). */
+.sw-table-totals tfoot th,
+.sw-table-totals tfoot td {
+    background: var(--th-bg);
+    color: var(--th-color);
+    padding: var(--sw-spacing-sm) 0.8125rem;
+    font-size: var(--sw-text-base);
+    font-weight: 700;
+    line-height: 1.35;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    border-top: 2px solid rgba(40, 68, 154, 0.2);
+    border-top: 2px solid color-mix(in srgb, var(--p) 20%, transparent);
+}
+
+@media (max-width: 1280.98px) {
+    .sw-table-totals tfoot th,
+    .sw-table-totals tfoot td {
+        padding: 0.45rem 0.65rem;
+        font-size: var(--sw-text-sm);
+    }
+}
+
+.sw-table-compact.sw-table-totals tfoot th,
+.sw-table-compact.sw-table-totals tfoot td {
+    padding: 0.45rem 0.65rem;
+    font-size: var(--sw-text-sm);
+}
+
+/* Etiqueta de la fila ("Totales del rol"), alineada al texto y no a la cifra. */
+.sw-table-totals tfoot .sw-table-total-label {
+    font-size: var(--sw-text-xs);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+/* Pie anclado abajo dentro del wrap acotado. */
+.sw-list-table-wrap .sw-table-totals tfoot th,
+.sw-list-table-wrap .sw-table-totals tfoot td {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+}
+
+/* Celda fija a la derecha en el pie: por encima del resto del pie y del
+   cuerpo, anclada abajo y a la derecha. */
+.sw-list-table-wrap .sw-table-totals tfoot tr > .sw-table-sticky-col {
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    width: 1%;
+}
+
+/* ===== src/components/tabs.css ===== */
+/* Tabs simples
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.sw-tabs {
+    display: flex;
+    border-bottom: var(--brd);
+    margin-bottom: 18px;
+}
+
+.sw-tab {
+    padding: 0.65rem 1.2rem;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--bc2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s;
+}
+
+.sw-tab.active {
+    color: var(--p);
+    border-bottom-color: var(--p);
+}
+
+/* ===== src/components/toast.css ===== */
+/* Toast — de SoffiFac (Familia A), único patrón de notificación efímera del
+   sistema. Distinto de .sw-alert (_alerts.scss): el toast flota sobre el
+   contenido y se auto-cierra; .sw-alert es un bloque fijo que se queda en el
+   flujo de la página.
+
+   Sofficon puede seguir usando sweetalert2: vendor-sweetalert2.css contiene el
+   override canónico. Para avisos nuevos, preferir .sw-alert-toast. */
+
+.sw-alert.sw-alert-hide {
+    animation: sw-alert-out 0.2s ease-in forwards;
+}
+
+/* Variante toast: notificaciones cortas de una sola acción puntual
+   ("Producto creado correctamente"). Flota sobre el contenido en vez de
+   ocupar espacio en el layout — para mensajes largos o específicos (los de
+   facturas, listas de errores de validación, etc.) usar el .sw-alert
+   normal, que se queda en el flujo de la página. */
+.sw-alert-toast {
+    position: fixed;
+    top: 88px;
+    right: 20px;
+    z-index: var(--sw-z-toast);
+    max-width: min(360px, calc(100vw - 40px));
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: var(--sh-lg);
+}
+
+.sw-alert-close {
+    margin-left: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    opacity: 0.6;
+    cursor: pointer;
+    line-height: 1;
+    font-size: var(--sw-text-sm);
+}
+
+.sw-alert-close:hover {
+    opacity: 1;
+}
+
+@keyframes sw-alert-in {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes sw-alert-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .sw-alert-toast {
+        left: 16px;
+        right: 16px;
+        top: 80px;
+        max-width: none;
+    }
+}
+
+/* ===== src/components/tooltip.css ===== */
+/* Tooltip CSS-only */
+
+.sw-tooltip {
+    position: relative;
+    display: inline-flex;
+}
+
+.sw-tooltip::after {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    z-index: var(--sw-z-dropdown);
+    width: max-content;
+    max-width: 240px;
+    padding: 0.45rem 0.65rem;
+    border-radius: var(--r);
+    background: var(--bc);
+    color: var(--b1);
+    content: attr(data-tooltip);
+    font-size: var(--sw-text-xs);
+    line-height: 1.35;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition: opacity 0.15s, transform 0.15s;
+}
+
+.sw-tooltip:hover::after,
+.sw-tooltip:focus-visible::after,
+.sw-tooltip.is-open::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.sw-tooltip-bottom::after {
+    top: calc(100% + 8px);
+    bottom: auto;
+    transform: translate(-50%, -4px);
+}
+
+.sw-tooltip-bottom:hover::after,
+.sw-tooltip-bottom:focus-visible::after,
+.sw-tooltip-bottom.is-open::after {
+    transform: translate(-50%, 0);
+}
+
+/* ===== src/components/vendor-select2.css ===== */
+/* Overrides de tema sobre select2 (librería de terceros)
+   Extraído de Sofficon soffi-ui/src/core/components.css (verificado: color-mix con fallback estático) */
+
+.select2-hidden-accessible {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+.select2-container--default .select2-selection--single {
+    display: flex;
+    align-items: center;
+    min-height: 43px;
+    border: 1.5px solid rgba(67, 97, 238, 0.42);
+    border-radius: var(--r);
+    background: var(--b1);
+    color: var(--bc);
+    outline: none;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 2.25rem;
+    color: var(--bc);
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: var(--bc2);
+}
+
+.sw-select.sw-select-empty + .select2-container .select2-selection__rendered {
+    color: var(--bc2);
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 6px;
+    right: 8px;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--single,
+.select2-container--default.select2-container--open .select2-selection--single {
+    border-color: var(--p);
+    box-shadow: 0 0 0 3px rgba(40, 68, 154, 0.12);
+}
+
+.select2-dropdown {
+    border: var(--brd);
+    border-radius: var(--r);
+    background: var(--b1);
+    color: var(--bc);
+}
+
+.select2-search--dropdown .select2-search__field {
+    height: 40px;
+    padding: 0.5rem 0.85rem;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    border: 1.5px solid rgba(67, 97, 238, 0.42);
+    border-radius: var(--r);
+    color: var(--bc);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background: var(--p);
+    color: var(--btn-text);
+}
+
+@supports (background: color-mix(in srgb, red 1%, blue)) {
+    .select2-container--default .select2-selection--single,
+    .select2-search--dropdown .select2-search__field {
+        border-color: color-mix(in srgb, var(--s) 42%, transparent);
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--single,
+    .select2-container--default.select2-container--open .select2-selection--single {
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--p) 12%, transparent);
+    }
+}
+
+/* ===== src/components/vendor-sweetalert2.css ===== */
+/* SweetAlert2 v11 — override visual canónico de Soffi UI. Cargar soffi-ui.css
+   después del CSS de SweetAlert2 para que este contrato tenga prioridad. */
+.swal2-container {
+    --swal2-background: var(--b1);
+    --swal2-color: var(--bc);
+    --swal2-confirm-button-background-color: var(--p);
+    --swal2-confirm-button-color: var(--btn-text);
+    --swal2-cancel-button-background-color: transparent;
+    --swal2-cancel-button-color: var(--bc);
+    --swal2-validation-message-background: var(--b2);
+    --swal2-validation-message-color: var(--bc);
+    --swal2-timer-progress-bar-background: var(--p);
+    z-index: var(--sw-z-toast) !important;
+}
+
+.swal2-popup {
+    width: min(32em, calc(100vw - 32px)) !important;
+    padding: var(--sw-spacing-xl) !important;
+    border: var(--brd) !important;
+    border-radius: var(--rl) !important;
+    background: var(--b1) !important;
+    color: var(--bc) !important;
+    box-shadow: var(--sh-lg) !important;
+    font-family: var(--sw-font-sans) !important;
+}
+
+.swal2-title {
+    margin: 0 0 var(--sw-spacing-sm) !important;
+    padding: 0 !important;
+    color: var(--p) !important;
+    font-size: var(--sw-text-xl) !important;
+    font-weight: var(--sw-font-semibold) !important;
+}
+
+.swal2-html-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    color: var(--bc2) !important;
+    font-size: var(--sw-text-md) !important;
+    line-height: var(--sw-leading-base) !important;
+}
+
+.swal2-actions {
+    gap: var(--sw-spacing-sm) !important;
+    margin: var(--sw-spacing-lg) auto 0 !important;
+}
+
+.swal2-styled {
+    margin: 0 !important;
+    border-radius: var(--r) !important;
+    font-family: inherit !important;
+    font-size: var(--sw-text-md) !important;
+    font-weight: var(--sw-font-medium) !important;
+}
+
+.swal2-confirm {
+    background: var(--p) !important;
+    color: var(--btn-text) !important;
+}
+
+.swal2-cancel {
+    border: var(--brd) !important;
+    background: transparent !important;
+    color: var(--bc) !important;
+}
+
+.swal2-confirm:focus-visible,
+.swal2-cancel:focus-visible,
+.swal2-deny:focus-visible,
+.swal2-input:focus,
+.swal2-textarea:focus,
+.swal2-select:focus {
+    outline: 2px solid var(--a) !important;
+    outline-offset: 2px !important;
+    box-shadow: none !important;
+}
+
+.swal2-input,
+.swal2-textarea,
+.swal2-select {
+    width: calc(100% - 2rem) !important;
+    margin: var(--sw-spacing-md) auto 0 !important;
+    padding: var(--sw-spacing-sm) var(--sw-spacing-md) !important;
+    border: var(--brd-s) !important;
+    border-radius: var(--r) !important;
+    background: var(--b1) !important;
+    color: var(--bc) !important;
+    font-family: inherit !important;
+    font-size: var(--sw-text-md) !important;
+}
+
+.swal2-validation-message {
+    margin: var(--sw-spacing-md) 0 0 !important;
+    border: var(--brd) !important;
+    color: var(--bc) !important;
+    font-size: var(--sw-text-sm) !important;
+}
+
+.swal2-icon.swal2-success {
+    border-color: var(--su) !important;
+    color: var(--su) !important;
+}
+
+.swal2-icon.swal2-error {
+    border-color: var(--er) !important;
+    color: var(--er) !important;
+}
+
+.swal2-icon.swal2-warning {
+    border-color: var(--wa) !important;
+    color: var(--wa) !important;
+}
+
+.swal2-icon.swal2-info,
+.swal2-icon.swal2-question {
+    border-color: var(--in) !important;
+    color: var(--in) !important;
+}
+
+.swal2-toast {
+    padding: var(--sw-spacing-md) !important;
+    border: var(--brd) !important;
+    box-shadow: var(--sh-lg) !important;
+}
+
+.swal2-toast .swal2-title,
+.swal2-toast .swal2-html-container {
+    font-size: var(--sw-text-sm) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .swal2-show,
+    .swal2-hide {
+        animation: none !important;
+    }
+}
