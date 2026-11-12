@@ -1,59 +1,164 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Tarevo
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación web responsiva para la gestión operativa de **escenarios deportivos**. Es el proyecto de
+la Actividad 1 de *Desarrollo de aplicaciones con asistentes de programación basados en IA* (UNIR).
 
-## About Laravel
+## Qué hace la aplicación
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Acceso** con usuario y contraseña, con dos roles: *supervisor* y *encargado operativo*.
+- **Gestión de personal** (solo supervisor): registrar, editar y eliminar usuarios y asignarles un rol.
+- **Gestión de escenarios deportivos** (supervisor y encargado operativo): registrar, editar y eliminar
+  instalaciones con su dirección, descripción y responsable.
+- **Gestión de tareas** (supervisor y encargado operativo): registrar, editar y eliminar tareas,
+  asignando cada una a una instalación y a un responsable (encargado operativo).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+La única restricción por rol es que la gestión de personal es exclusiva del supervisor.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Versiones usadas
 
-## Learning Laravel
+Estas son las versiones con las que se desarrolló y se comprobó que el proyecto instala y arranca.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Componente | Versión | Notas |
+|---|---|---|
+| PHP | **8.5.12** | Mínimo exigido por el proyecto: 8.3 |
+| Composer | **2.9.5** | Cualquier 2.x reciente |
+| Laravel | **13.42.0** | Se instala solo con Composer |
+| PostgreSQL | **18.6** | Base de datos de la aplicación |
+| Git | **2.47.3** | Para clonar el repositorio |
+| Soffi UI | **1.2.1** | Sistema de diseño; se instala con Composer desde GitHub |
+| Font Awesome Free | **6.7.2** | Ya incluido en `public/vendor/fontawesome/` |
+| Pest | **5.3.5** | Solo desarrollo (pruebas) |
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Node.js y npm no son necesarios** para ejecutar la aplicación: los estilos y scripts ya vienen
+publicados en `public/vendor/`. (El entorno de desarrollo tenía Node 20.19.0 y npm 10.8.2, pero
+no se usan.)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Extensiones de PHP requeridas
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+`ctype`, `curl`, `dom`, `fileinfo`, `gd`, `json`, `mbstring`, `openssl`, `pdo_pgsql`, `pgsql`,
+`tokenizer`, `xml` y `zip`. Se comprueban con:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+php -m
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Instalación paso a paso
 
-## Contributing
+### 1. Instalar los requisitos
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Instala **PHP 8.3 o superior** (con las extensiones de arriba), **Composer 2**, **PostgreSQL** y
+**Git**. Verifica las versiones:
 
-## Code of Conduct
+```bash
+php -v
+composer --version
+psql --version
+git --version
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+En Debian/Ubuntu las extensiones se instalan, por ejemplo, con
+`sudo apt install php-pgsql php-mbstring php-xml php-curl php-gd php-zip` (los nombres exactos
+dependen de la versión de PHP instalada).
 
-## Security Vulnerabilities
+### 2. Clonar el repositorio
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+git clone https://github.com/Cristhianjvg/Tarevo.git
+cd Tarevo
+```
 
-## License
+### 3. Instalar las dependencias
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# Tarevo
+```bash
+composer install
+```
+
+Esto descarga Laravel y el paquete `soffiweb/soffi-ui` desde su repositorio de GitHub, por lo que
+hace falta conexión a internet.
+
+### 4. Crear la base de datos
+
+Crea una base de datos vacía en PostgreSQL:
+
+```bash
+sudo -u postgres psql -c "CREATE DATABASE tarevo;"
+```
+
+Si quieres un usuario propio para la aplicación:
+
+```bash
+sudo -u postgres psql -c "CREATE USER tarevo WITH PASSWORD 'una-contraseña';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE tarevo TO tarevo;"
+sudo -u postgres psql -d tarevo -c "GRANT ALL ON SCHEMA public TO tarevo;"
+```
+
+### 5. Configurar el entorno
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Abre `.env` y cambia estas líneas. **El archivo de ejemplo viene con SQLite, y este proyecto usa
+PostgreSQL**, así que hay que reemplazarlas:
+
+```env
+APP_NAME=Tarevo
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=tarevo
+DB_USERNAME=postgres
+DB_PASSWORD=la-contraseña-de-tu-usuario
+
+# Contraseña de los usuarios de prueba (obligatoria, el seeder falla sin ella)
+SEEDER_PASSWORD=elige-una-contraseña
+```
+
+Usa en `DB_USERNAME` y `DB_PASSWORD` el usuario que creaste en el paso anterior.
+
+### 6. Crear las tablas y los usuarios de prueba
+
+```bash
+php artisan migrate --seed
+```
+
+Crea las tablas, los dos roles, un usuario por rol y los tipos de tarea (Limpieza, Mantenimiento,
+Inspección y Adecuación).
+
+### 7. Arrancar la aplicación
+
+```bash
+php artisan serve
+```
+
+Abre <http://localhost:8000> en el navegador.
+
+## Usuarios de prueba
+
+Los dos usuarios tienen la contraseña que pusiste en `SEEDER_PASSWORD`:
+
+| Rol | Correo | Acceso |
+|---|---|---|
+| Supervisor | `supervisor@example.test` | Personal, instalaciones y tareas |
+| Encargado operativo | `encargado_operativo@example.test` | Instalaciones y tareas (sin acceso a Personal) |
+
+## Solución de problemas
+
+| Error | Causa y solución |
+|---|---|
+| `could not find driver` | Falta la extensión `pdo_pgsql` de PHP. Instálala y comprueba con `php -m`. |
+| `SQLSTATE[08006] ... connection refused` | PostgreSQL no está en marcha o `DB_HOST`/`DB_PORT` son incorrectos. |
+| `password authentication failed` | `DB_USERNAME` o `DB_PASSWORD` no coinciden con el usuario de PostgreSQL. |
+| `Define SEEDER_PASSWORD en el entorno...` | Falta `SEEDER_PASSWORD` en `.env`. Añádela y vuelve a ejecutar `php artisan migrate --seed`. |
+| `No application encryption key has been specified` | Falta `php artisan key:generate`. |
+| `composer install` no encuentra `soffiweb/soffi-ui` | Comprueba la conexión a internet y que GitHub sea accesible. |
+| La página se ve sin estilos | Revisa que exista `public/vendor/soffi-ui/` y que `APP_URL` coincida con la dirección que abres. |
+
+## Arquitectura
+
+- **Backend:** Laravel 13, aplicación monolítica con patrón MVC.
+- **Base de datos:** PostgreSQL.
+- **Frontend:** Blade con el sistema de diseño Soffi UI y Font Awesome 6.
