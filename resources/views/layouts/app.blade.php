@@ -14,14 +14,18 @@
         ];
     }
 
+    $menu[] = ['group' => 'Gestión'];
+
     if ($authUser?->esSupervisor() && Route::has('personal.index')) {
-        $menu[] = ['group' => 'Gestión'];
         $menu[] = [
             'label' => 'Personal',
             'url' => route('personal.index'),
             'icon' => 'fa-users',
             'active' => request()->routeIs('personal.*'),
         ];
+    }
+
+    if (Route::has('instalaciones.index')) {
         $menu[] = [
             'label' => 'Instalaciones',
             'url' => route('instalaciones.index'),
@@ -29,6 +33,7 @@
             'active' => request()->routeIs('instalaciones.*'),
         ];
     }
+
     if (Route::has('tareas.index')) {
         $menu[] = [
             'label' => 'Tareas',

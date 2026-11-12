@@ -13,8 +13,6 @@ class InstalacionController extends Controller
 {
     public function index(Request $request): View
     {
-        abort_unless($request->user()->esSupervisor(), 403);
-
         $instalaciones = Instalacion::with('responsable')
             ->orderBy('nombre')
             ->paginate(15);
@@ -26,8 +24,6 @@ class InstalacionController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        abort_unless($request->user()->esSupervisor(), 403);
-
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
             'nombre' => 'required|string|max:255',
@@ -42,8 +38,6 @@ class InstalacionController extends Controller
 
     public function update(Request $request, Instalacion $instalacion): RedirectResponse
     {
-        abort_unless($request->user()->esSupervisor(), 403);
-
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
             'nombre' => 'required|string|max:255',
@@ -58,8 +52,6 @@ class InstalacionController extends Controller
 
     public function destroy(Request $request, Instalacion $instalacion): RedirectResponse
     {
-        abort_unless($request->user()->esSupervisor(), 403);
-
         try {
             $instalacion->delete();
         } catch (QueryException) {

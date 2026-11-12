@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RolesAndUsersSeeder::class,
+            TiposTareaSeeder::class,
         ]);
     }
 }

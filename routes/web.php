@@ -27,5 +27,6 @@ Route::put('/instalaciones/{instalacion}', [InstalacionController::class, 'updat
 Route::delete('/instalaciones/{instalacion}', [InstalacionController::class, 'destroy'])->middleware('auth')->name('instalaciones.destroy');
 
 Route::get('/tarea', [TareaController::class, 'index'])->middleware('auth')->name('tareas.index');
-Route::get('/tarea/create', [TareaController::class, 'create'])
-    ->name('tareas.create');
+Route::post('/tarea', [TareaController::class, 'store'])->middleware('auth')->name('tareas.store');
+Route::put('/tarea/{tarea}', [TareaController::class, 'update'])->middleware('auth')->name('tareas.update');
+Route::delete('/tarea/{tarea}', [TareaController::class, 'destroy'])->middleware('auth')->name('tareas.destroy');
